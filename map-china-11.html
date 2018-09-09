@@ -1,0 +1,3681 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=EDGE">
+    <title>ECharts</title>
+    <!--<link rel="stylesheet" type="text/css" href="css/main.css"/>-->
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
+    <script src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
+    <style>#china-map {width:582px; height: 482px;margin: auto;}</style>
+</head>
+<body>
+<div id="china-map"></div>
+<script>
+    var myChart = echarts.init(document.getElementById('china-map'));
+    function initChina(){
+        var option = {
+            title : {
+                // text: '订单量',
+                // subtext: '纯属虚构',
+                x:'center'
+            },
+            tooltip : { //提示框组件。
+                trigger: 'item' //数据项图形触发，主要在散点图，饼图等无类目轴的图表中使用。
+            },
+            legend: {
+                orient: 'horizontal', //图例的排列方向
+                x:'left', //图例的位置
+                data:['订单量']
+            },
+
+            visualMap: {//颜色的设置  dataRange
+                x: 'left',
+                y: 'center',
+                splitList: [
+                    {start: 1500},
+                    {start: 900, end: 1500},
+                    {start: 310, end: 1000},
+                    {start: 200, end: 300},
+                    {start: 10, end: 200, label: '10 到 200（自定义label）'},
+                    {start: 5, end: 5, label: '5（自定义特殊颜色）', color: '#077FBA'},
+                    {end: 10}
+                ],
+//            min: 0,
+//            max: 2500,
+//            calculable : true,//颜色呈条状
+                text:['高','低'],// 文本，默认为数值文本
+                // color: ['#E0022B', '#E09107', '#A3E00B']
+                color: ['#C1D3E3', '#077FBA', '#C9514C']
+            },
+            toolbox: {//工具栏
+                show: false,
+                orient : 'vertical',//工具栏 icon 的布局朝向
+                x: 'right',
+                y: 'center',
+                feature : {//各工具配置项。
+                    mark : {show: true},
+                    dataView : {show: true, readOnly: false},//数据视图工具，可以展现当前图表所用的数据，编辑后可以动态更新。
+                    restore : {show: true},//配置项还原。
+                    saveAsImage : {show: true}//保存为图片。
+                }
+            },
+            roamController: {//控制地图的上下左右放大缩小 图上没有显示
+                show: true,
+                x: 'right',
+                mapTypeControl: {
+                    'china': true
+                }
+            },
+            series : [
+                {
+                    name: '案件量',
+                    type: 'map',
+                    mapType: 'china',
+                    roam: false,//是否开启鼠标缩放和平移漫游
+                    itemStyle:{//地图区域的多边形 图形样式
+                        normal:{//是图形在默认状态下的样式
+                            label:{
+                                show:false,//是否显示标签
+                                textStyle: {
+                                    color: "rgb(249, 249, 249)"
+                                }
+                            }
+                        },
+                        emphasis:{//是图形在高亮状态下的样式,比如在鼠标悬浮或者图例联动高亮时
+                            label:{show:true}
+                        }
+                    },
+                    top:"3%",//组件距离容器的距离
+                    data:[
+                        {name: '北京',value: Math.round(Math.random()*2000)},
+                        {name: '天津',value: Math.round(Math.random()*2000)},
+                        {name: '上海',value: Math.round(Math.random()*2000)},
+                        {name: '重庆',value: Math.round(Math.random()*2000)},
+                        {name: '河北',value: 0},
+                        {name: '河南',value: Math.round(Math.random()*2000)},
+                        {name: '云南',value: 5},
+                        {name: '辽宁',value: 305},
+                        {name: '黑龙江',value: Math.round(Math.random()*2000)},
+                        {name: '湖南',value: 200},
+                        {name: '安徽',value: Math.round(Math.random()*2000)},
+                        {name: '山东',value: Math.round(Math.random()*2000)},
+                        {name: '新疆',value: Math.round(Math.random()*2000)},
+                        {name: '江苏',value: Math.round(Math.random()*2000)},
+                        {name: '浙江',value: Math.round(Math.random()*2000)},
+                        {name: '江西',value: Math.round(Math.random()*2000)},
+                        {name: '湖北',value: Math.round(Math.random()*2000)},
+                        {name: '广西',value: Math.round(Math.random()*2000)},
+                        {name: '甘肃',value: Math.round(Math.random()*2000)},
+                        {name: '山西',value: Math.round(Math.random()*2000)},
+                        {name: '内蒙古',value: Math.round(Math.random()*2000)},
+                        {name: '陕西',value: Math.round(Math.random()*2000)},
+                        {name: '吉林',value: Math.round(Math.random()*2000)},
+                        {name: '福建',value: Math.round(Math.random()*2000)},
+                        {name: '贵州',value: Math.round(Math.random()*2000)},
+                        {name: '广东',value: Math.round(Math.random()*2000)},
+                        {name: '青海',value: Math.round(Math.random()*2000)},
+                        {name: '西藏',value: Math.round(Math.random()*2000)},
+                        {name: '四川',value: Math.round(Math.random()*2000)},
+                        {name: '宁夏',value: Math.round(Math.random()*2000)},
+                        {name: '海南',value: Math.round(Math.random()*2000)},
+                        {name: '台湾',value: Math.round(Math.random()*2000)},
+                        {name: '香港',value: Math.round(Math.random()*2000)},
+                        {name: '澳门',value: Math.round(Math.random()*2000)}
+                    ]
+                }
+            ]
+        };
+        myChart.setOption(option);
+    }
+    initChina();
+
+    myChart.on('mouseover', function (params) {
+        var dataIndex = params.dataIndex;
+        // alert(params);
+    });
+
+    function initEcharts(pName){
+        var myChart1 = echarts.init(document.getElementById('china-map'));
+        var option = {
+            title : {
+                // text: '订单量',
+                // subtext: '纯属虚构',
+                x:'center'
+            },
+            tooltip : {//提示框组件。
+                trigger: 'item'//数据项图形触发，主要在散点图，饼图等无类目轴的图表中使用。
+            },
+            legend: {
+                show: false,
+                orient: 'horizontal',//图例的排列方向
+                x:'left',//图例的位置
+                data:['订单量']
+            },
+
+            visualMap: {//颜色的设置  dataRange
+                x: 'left',
+                y: 'center',
+                // splitList: [
+                //     {start: 1500},
+                //     {start: 900, end: 1500},
+                //     {start: 310, end: 1000},
+                //     {start: 200, end: 300},
+                //     {start: 10, end: 200, label: '10 到 200（自定义label）'},
+                //     {start: 5, end: 5, label: '5（自定义特殊颜色）', color: '#077FBA'},
+                //     {end: 10}
+                // ],
+//            min: 0,
+//            max: 2500,
+                calculable : true,//颜色呈条状
+                text:['高','低'],// 文本，默认为数值文本
+                // color: ['#E0022B', '#E09107', '#A3E00B']
+                color: ['#C54B47','#E87A5C', '#E4C559', '#8FB95C','#59B0CA','#037AB5','#C2CCD5']
+            },
+            toolbox: {//工具栏
+                show: true,
+                orient : 'vertical',//工具栏 icon 的布局朝向
+                x: 'right',
+                y: 'center',
+                feature : {//各工具配置项。
+                    mark : {show: true},
+                    dataView : {show: true, readOnly: false},//数据视图工具，可以展现当前图表所用的数据，编辑后可以动态更新。
+                    restore : {show: true},//配置项还原。
+                    saveAsImage : {show: true}//保存为图片。
+                }
+            },
+            roamController: {//控制地图的上下左右放大缩小 图上没有显示
+                show: true,
+                x: 'right',
+                mapTypeControl: {
+                    'china': true
+                }
+            },
+            series : [
+                {
+                    name: '订单量',
+                    type: 'map',
+                    mapType: pName,
+                    roam: false,//是否开启鼠标缩放和平移漫游
+                    itemStyle:{//地图区域的多边形 图形样式
+                        normal:{//是图形在默认状态下的样式
+                            label:{
+                                show:false,//是否显示标签
+                                textStyle: {
+                                    color: "rgb(249, 249, 249)"
+                                }
+                            }
+                        },
+                        //emphasis:{//是图形在高亮状态下的样式,比如在鼠标悬浮或者图例联动高亮时
+                         //   label:{show:false}
+                        //}
+
+
+                    },
+                    top:"3%",//组件距离容器的距离
+                    
+
+
+                }
+            ]
+        };
+
+
+
+
+        var option1 = {
+      title : {
+                // text: '订单量',
+                // subtext: '纯属虚构',
+                x:'center'
+            },
+            tooltip : {//提示框组件。
+                trigger: 'item'//数据项图形触发，主要在散点图，饼图等无类目轴的图表中使用。
+            },
+            legend: {
+                show: false,
+                orient: 'horizontal',//图例的排列方向
+                x:'left',//图例的位置
+                data:['订单量']
+            },
+
+            visualMap: {//颜色的设置  dataRange
+                x: 'left',
+                y: 'center',
+                // splitList: [
+                //     {start: 1500},
+                //     {start: 900, end: 1500},
+                //     {start: 310, end: 1000},
+                //     {start: 200, end: 300},
+                //     {start: 10, end: 200, label: '10 到 200（自定义label）'},
+                //     {start: 5, end: 5, label: '5（自定义特殊颜色）', color: '#077FBA'},
+                //     {end: 10}
+                // ],
+//            min: 0,
+//            max: 2500,
+                calculable : true,//颜色呈条状
+                text:['高','低'],// 文本，默认为数值文本
+                // color: ['#E0022B', '#E09107', '#A3E00B']
+                color: ['#C54B47','#E87A5C', '#E4C559', '#8FB95C','#59B0CA','#037AB5','#C2CCD5']
+            },
+            toolbox: {//工具栏
+                show: true,
+                orient : 'vertical',//工具栏 icon 的布局朝向
+                x: 'right',
+                y: 'center',
+                feature : {//各工具配置项。
+                    mark : {show: true},
+                    dataView : {show: true, readOnly: false},//数据视图工具，可以展现当前图表所用的数据，编辑后可以动态更新。
+                    restore : {show: true},//配置项还原。
+                    saveAsImage : {show: true}//保存为图片。
+                }
+            },
+            roamController: {//控制地图的上下左右放大缩小 图上没有显示
+                show: true,
+                x: 'right',
+                mapTypeControl: {
+                    'china': true
+                }
+            },
+            series : [
+                {
+                    name: '订单量',
+                    type: 'map',
+                    mapType: '四川',
+                    roam: false,//是否开启鼠标缩放和平移漫游
+                    itemStyle:{//地图区域的多边形 图形样式
+                        normal:{//是图形在默认状态下的样式
+                            label:{
+                                show:false,//是否显示标签
+                                textStyle: {
+                                    color: "rgb(249, 249, 249)"
+                                }
+                            }
+                        },
+                        //emphasis:{//是图形在高亮状态下的样式,比如在鼠标悬浮或者图例联动高亮时
+                         //   label:{show:false}
+                        //}
+
+
+                    },
+                    top:"3%",//组件距离容器的距离
+                        data:[
+                        {name: '广元市',value: Math.round(Math.random()*2000)},
+                        {name: '巴中市',value: Math.round(Math.random()*2000)},
+                        {name: '绵阳市',value: Math.round(Math.random()*2000)},
+                        {name: '阿坝藏族羌族自治州',value: Math.round(Math.random()*2000)},
+                        {name: '达州市',value: 0},
+                        {name: '南充市',value: Math.round(Math.random()*2000)},
+                        {name: '衡阳市',value: 5},
+                        {name: '成都市',value: 305},
+                        {name: '遂宁市',value: Math.round(Math.random()*2000)},
+                        {name: '广安市',value: 200},
+                        {name: '眉山市',value: Math.round(Math.random()*2000)},
+                        {name: '资阳市',value: Math.round(Math.random()*2000)},
+                        {name: '内江市',value: Math.round(Math.random()*2000)},
+                        {name: '泸州市',value: Math.round(Math.random()*2000)},
+                        {name: '自贡市',value: Math.round(Math.random()*2000)},
+                        {name: '宜宾市',value: Math.round(Math.random()*2000)},
+                        {name: '凉山彝族自治州',value: Math.round(Math.random()*2000)},
+                        {name: '攀枝花市',value: Math.round(Math.random()*2000)},
+                        {name: '乐山市',value: Math.round(Math.random()*2000)},
+                        {name: '雅安市',value: Math.round(Math.random()*2000)},
+                        {name: '甘孜藏族自治州',value: Math.round(Math.random()*2000)}
+                    ]
+                    
+
+
+                }
+            ]
+    };
+
+
+    var option2 = {
+            title : {
+                // text: '订单量',
+                // subtext: '纯属虚构',
+                x:'center'
+            },
+            tooltip : { //提示框组件。
+                trigger: 'item' //数据项图形触发，主要在散点图，饼图等无类目轴的图表中使用。
+            },
+            legend: {
+                orient: 'horizontal', //图例的排列方向
+                x:'left', //图例的位置
+                data:['订单量']
+            },
+
+            visualMap: {//颜色的设置  dataRange
+                x: 'left',
+                y: 'center',
+                splitList: [
+                    {start: 1500},
+                    {start: 900, end: 1500},
+                    {start: 310, end: 1000},
+                    {start: 200, end: 300},
+                    {start: 10, end: 200, label: '10 到 200（自定义label）'},
+                    {start: 5, end: 5, label: '5（自定义特殊颜色）', color: '#077FBA'},
+                    {end: 10}
+                ],
+//            min: 0,
+//            max: 2500,
+//            calculable : true,//颜色呈条状
+                text:['高','低'],// 文本，默认为数值文本
+                // color: ['#E0022B', '#E09107', '#A3E00B']
+                color: ['#C1D3E3', '#077FBA', '#C9514C']
+            },
+            toolbox: {//工具栏
+                show: false,
+                orient : 'vertical',//工具栏 icon 的布局朝向
+                x: 'right',
+                y: 'center',
+                feature : {//各工具配置项。
+                    mark : {show: true},
+                    dataView : {show: true, readOnly: false},//数据视图工具，可以展现当前图表所用的数据，编辑后可以动态更新。
+                    restore : {show: true},//配置项还原。
+                    saveAsImage : {show: true}//保存为图片。
+                }
+            },
+            roamController: {//控制地图的上下左右放大缩小 图上没有显示
+                show: true,
+                x: 'right',
+                mapTypeControl: {
+                    'china': true
+                }
+            },
+            series : [
+                {
+                    name: '案件量',
+                    type: 'map',
+                    mapType: '上海',
+                    roam: false,//是否开启鼠标缩放和平移漫游
+                    itemStyle:{//地图区域的多边形 图形样式
+                        normal:{//是图形在默认状态下的样式
+                            label:{
+                                show:false,//是否显示标签
+                                textStyle: {
+                                    color: "rgb(249, 249, 249)"
+                                }
+                            }
+                        },
+                        emphasis:{//是图形在高亮状态下的样式,比如在鼠标悬浮或者图例联动高亮时
+                            label:{show:true}
+                        }
+                    },
+                    top:"3%",//组件距离容器的距离
+                    data:[
+                        {name: '崇明区',value: Math.round(Math.random()*2000)},
+                        {name: '浦东新区',value: Math.round(Math.random()*2000)},
+                        {name: '杨浦区',value: Math.round(Math.random()*2000)},
+                        {name: '宝山区',value: Math.round(Math.random()*2000)},
+                        {name: '嘉定区',value: 0},
+                        {name: '普陀区',value: Math.round(Math.random()*2000)},
+                        {name: '静安区',value: 5},
+                        {name: '虹口区',value: 305},
+                        {name: '青浦区',value: Math.round(Math.random()*2000)},
+                        {name: '金山区',value: 200},
+                        {name: '奉贤区',value: Math.round(Math.random()*2000)},
+                        {name: '松江区',value: Math.round(Math.random()*2000)},
+                        {name: '闵行区',value: Math.round(Math.random()*2000)},
+                        
+                    ]
+                }
+            ]
+        };
+
+
+
+        var option3 = {
+            title : {
+                // text: '订单量',
+                // subtext: '纯属虚构',
+                x:'center'
+            },
+            tooltip : { //提示框组件。
+                trigger: 'item' //数据项图形触发，主要在散点图，饼图等无类目轴的图表中使用。
+            },
+            legend: {
+                orient: 'horizontal', //图例的排列方向
+                x:'left', //图例的位置
+                data:['订单量']
+            },
+
+            visualMap: {//颜色的设置  dataRange
+                x: 'left',
+                y: 'center',
+                splitList: [
+                    {start: 1500},
+                    {start: 900, end: 1500},
+                    {start: 310, end: 1000},
+                    {start: 200, end: 300},
+                    {start: 10, end: 200, label: '10 到 200（自定义label）'},
+                    {start: 5, end: 5, label: '5（自定义特殊颜色）', color: '#077FBA'},
+                    {end: 10}
+                ],
+//            min: 0,
+//            max: 2500,
+//            calculable : true,//颜色呈条状
+                text:['高','低'],// 文本，默认为数值文本
+                // color: ['#E0022B', '#E09107', '#A3E00B']
+                color: ['#C1D3E3', '#077FBA', '#C9514C']
+            },
+            toolbox: {//工具栏
+                show: false,
+                orient : 'vertical',//工具栏 icon 的布局朝向
+                x: 'right',
+                y: 'center',
+                feature : {//各工具配置项。
+                    mark : {show: true},
+                    dataView : {show: true, readOnly: false},//数据视图工具，可以展现当前图表所用的数据，编辑后可以动态更新。
+                    restore : {show: true},//配置项还原。
+                    saveAsImage : {show: true}//保存为图片。
+                }
+            },
+            roamController: {//控制地图的上下左右放大缩小 图上没有显示
+                show: true,
+                x: 'right',
+                mapTypeControl: {
+                    'china': true
+                }
+            },
+            series : [
+                {
+                    name: '案件量',
+                    type: 'map',
+                    mapType: '河北',
+                    roam: false,//是否开启鼠标缩放和平移漫游
+                    itemStyle:{//地图区域的多边形 图形样式
+                        normal:{//是图形在默认状态下的样式
+                            label:{
+                                show:false,//是否显示标签
+                                textStyle: {
+                                    color: "rgb(249, 249, 249)"
+                                }
+                            }
+                        },
+                        emphasis:{//是图形在高亮状态下的样式,比如在鼠标悬浮或者图例联动高亮时
+                            label:{show:true}
+                        }
+                    },
+                    top:"3%",//组件距离容器的距离
+                    data:[
+                        {name: '承德市',value: Math.round(Math.random()*2000)},
+                        {name: '张家口市',value: Math.round(Math.random()*2000)},
+                        {name: '唐山市',value: Math.round(Math.random()*2000)},
+                        {name: '秦皇岛市',value: Math.round(Math.random()*2000)},
+                        {name: '廊坊市',value: 0},
+                        {name: '保定市',value: Math.round(Math.random()*2000)},
+                        {name: '沧州市',value: 5},
+                        {name: '石家庄市',value: 305},
+                        {name: '衡水市',value: Math.round(Math.random()*2000)},
+                        {name: '邢台市',value: 200},
+                        {name: '邯郸市',value: Math.round(Math.random()*2000)},
+                        
+                        
+                    ]
+                }
+            ]
+        };
+
+
+
+        var option4 = {
+            title : {
+                // text: '订单量',
+                // subtext: '纯属虚构',
+                x:'center'
+            },
+            tooltip : { //提示框组件。
+                trigger: 'item' //数据项图形触发，主要在散点图，饼图等无类目轴的图表中使用。
+            },
+            legend: {
+                orient: 'horizontal', //图例的排列方向
+                x:'left', //图例的位置
+                data:['订单量']
+            },
+
+            visualMap: {//颜色的设置  dataRange
+                x: 'left',
+                y: 'center',
+                splitList: [
+                    {start: 1500},
+                    {start: 900, end: 1500},
+                    {start: 310, end: 1000},
+                    {start: 200, end: 300},
+                    {start: 10, end: 200, label: '10 到 200（自定义label）'},
+                    {start: 5, end: 5, label: '5（自定义特殊颜色）', color: '#077FBA'},
+                    {end: 10}
+                ],
+//            min: 0,
+//            max: 2500,
+//            calculable : true,//颜色呈条状
+                text:['高','低'],// 文本，默认为数值文本
+                // color: ['#E0022B', '#E09107', '#A3E00B']
+                color: ['#C1D3E3', '#077FBA', '#C9514C']
+            },
+            toolbox: {//工具栏
+                show: false,
+                orient : 'vertical',//工具栏 icon 的布局朝向
+                x: 'right',
+                y: 'center',
+                feature : {//各工具配置项。
+                    mark : {show: true},
+                    dataView : {show: true, readOnly: false},//数据视图工具，可以展现当前图表所用的数据，编辑后可以动态更新。
+                    restore : {show: true},//配置项还原。
+                    saveAsImage : {show: true}//保存为图片。
+                }
+            },
+            roamController: {//控制地图的上下左右放大缩小 图上没有显示
+                show: true,
+                x: 'right',
+                mapTypeControl: {
+                    'china': true
+                }
+            },
+            series : [
+                {
+                    name: '案件量',
+                    type: 'map',
+                    mapType: '山西',
+                    roam: false,//是否开启鼠标缩放和平移漫游
+                    itemStyle:{//地图区域的多边形 图形样式
+                        normal:{//是图形在默认状态下的样式
+                            label:{
+                                show:false,//是否显示标签
+                                textStyle: {
+                                    color: "rgb(249, 249, 249)"
+                                }
+                            }
+                        },
+                        emphasis:{//是图形在高亮状态下的样式,比如在鼠标悬浮或者图例联动高亮时
+                            label:{show:true}
+                        }
+                    },
+                    top:"3%",//组件距离容器的距离
+                    data:[
+                        {name: '运城市',value: Math.round(Math.random()*2000)},
+                        {name: '临汾市',value: Math.round(Math.random()*2000)},
+                        {name: '晋城市',value: Math.round(Math.random()*2000)},
+                        {name: '长治市',value: Math.round(Math.random()*2000)},
+                        {name: '晋中市',value: 0},
+                        {name: '吕梁市',value: Math.round(Math.random()*2000)},
+                        {name: '太原市',value: 5},
+                        {name: '阳泉市',value: 305},
+                        {name: '朔州市',value: Math.round(Math.random()*2000)},
+                        {name: '大同市',value: 200},
+                        {name: '忻州市',value: Math.round(Math.random()*2000)},
+                        
+                        
+                    ]
+                }
+            ]
+        };
+
+        
+
+
+        var option5 = {
+            title : {
+                // text: '订单量',
+                // subtext: '纯属虚构',
+                x:'center'
+            },
+            tooltip : { //提示框组件。
+                trigger: 'item' //数据项图形触发，主要在散点图，饼图等无类目轴的图表中使用。
+            },
+            legend: {
+                orient: 'horizontal', //图例的排列方向
+                x:'left', //图例的位置
+                data:['订单量']
+            },
+
+            visualMap: {//颜色的设置  dataRange
+                x: 'left',
+                y: 'center',
+                splitList: [
+                    {start: 1500},
+                    {start: 900, end: 1500},
+                    {start: 310, end: 1000},
+                    {start: 200, end: 300},
+                    {start: 10, end: 200, label: '10 到 200（自定义label）'},
+                    {start: 5, end: 5, label: '5（自定义特殊颜色）', color: '#077FBA'},
+                    {end: 10}
+                ],
+//            min: 0,
+//            max: 2500,
+//            calculable : true,//颜色呈条状
+                text:['高','低'],// 文本，默认为数值文本
+                // color: ['#E0022B', '#E09107', '#A3E00B']
+                color: ['#C1D3E3', '#077FBA', '#C9514C']
+            },
+            toolbox: {//工具栏
+                show: false,
+                orient : 'vertical',//工具栏 icon 的布局朝向
+                x: 'right',
+                y: 'center',
+                feature : {//各工具配置项。
+                    mark : {show: true},
+                    dataView : {show: true, readOnly: false},//数据视图工具，可以展现当前图表所用的数据，编辑后可以动态更新。
+                    restore : {show: true},//配置项还原。
+                    saveAsImage : {show: true}//保存为图片。
+                }
+            },
+            roamController: {//控制地图的上下左右放大缩小 图上没有显示
+                show: true,
+                x: 'right',
+                mapTypeControl: {
+                    'china': true
+                }
+            },
+            series : [
+                {
+                    name: '案件量',
+                    type: 'map',
+                    mapType: '内蒙古',
+                    roam: false,//是否开启鼠标缩放和平移漫游
+                    itemStyle:{//地图区域的多边形 图形样式
+                        normal:{//是图形在默认状态下的样式
+                            label:{
+                                show:false,//是否显示标签
+                                textStyle: {
+                                    color: "rgb(249, 249, 249)"
+                                }
+                            }
+                        },
+                        emphasis:{//是图形在高亮状态下的样式,比如在鼠标悬浮或者图例联动高亮时
+                            label:{show:true}
+                        }
+                    },
+                    top:"3%",//组件距离容器的距离
+                    data:[
+                        {name: '阿拉善盟',value: Math.round(Math.random()*2000)},
+                        {name: '鄂尔多斯市',value: Math.round(Math.random()*2000)},
+                        {name: '巴彦淖尔市',value: Math.round(Math.random()*2000)},
+                        {name: '包头市',value: Math.round(Math.random()*2000)},
+                        {name: '呼和浩特市',value: 0},
+                        {name: '乌兰察布市',value: Math.round(Math.random()*2000)},
+                        {name: '锡林郭勒盟',value: 5},
+                        {name: '赤峰市',value: 305},
+                        {name: '通辽市',value: Math.round(Math.random()*2000)},
+                        {name: '兴安盟',value: 200},
+                        {name: '呼伦贝尔市',value: Math.round(Math.random()*2000)},
+                        
+                        
+                    ]
+                }
+            ]
+        };
+        
+
+
+
+         var option6 = {
+            title : {
+                // text: '订单量',
+                // subtext: '纯属虚构',
+                x:'center'
+            },
+            tooltip : { //提示框组件。
+                trigger: 'item' //数据项图形触发，主要在散点图，饼图等无类目轴的图表中使用。
+            },
+            legend: {
+                orient: 'horizontal', //图例的排列方向
+                x:'left', //图例的位置
+                data:['订单量']
+            },
+
+            visualMap: {//颜色的设置  dataRange
+                x: 'left',
+                y: 'center',
+                splitList: [
+                    {start: 1500},
+                    {start: 900, end: 1500},
+                    {start: 310, end: 1000},
+                    {start: 200, end: 300},
+                    {start: 10, end: 200, label: '10 到 200（自定义label）'},
+                    {start: 5, end: 5, label: '5（自定义特殊颜色）', color: '#077FBA'},
+                    {end: 10}
+                ],
+//            min: 0,
+//            max: 2500,
+//            calculable : true,//颜色呈条状
+                text:['高','低'],// 文本，默认为数值文本
+                // color: ['#E0022B', '#E09107', '#A3E00B']
+                color: ['#C1D3E3', '#077FBA', '#C9514C']
+            },
+            toolbox: {//工具栏
+                show: false,
+                orient : 'vertical',//工具栏 icon 的布局朝向
+                x: 'right',
+                y: 'center',
+                feature : {//各工具配置项。
+                    mark : {show: true},
+                    dataView : {show: true, readOnly: false},//数据视图工具，可以展现当前图表所用的数据，编辑后可以动态更新。
+                    restore : {show: true},//配置项还原。
+                    saveAsImage : {show: true}//保存为图片。
+                }
+            },
+            roamController: {//控制地图的上下左右放大缩小 图上没有显示
+                show: true,
+                x: 'right',
+                mapTypeControl: {
+                    'china': true
+                }
+            },
+            series : [
+                {
+                    name: '案件量',
+                    type: 'map',
+                    mapType: '辽宁',
+                    roam: false,//是否开启鼠标缩放和平移漫游
+                    itemStyle:{//地图区域的多边形 图形样式
+                        normal:{//是图形在默认状态下的样式
+                            label:{
+                                show:false,//是否显示标签
+                                textStyle: {
+                                    color: "rgb(249, 249, 249)"
+                                }
+                            }
+                        },
+                        emphasis:{//是图形在高亮状态下的样式,比如在鼠标悬浮或者图例联动高亮时
+                            label:{show:true}
+                        }
+                    },
+                    top:"3%",//组件距离容器的距离
+                    data:[
+                        {name: '葫芦岛市',value: Math.round(Math.random()*2000)},
+                        {name: '朝阳市',value: Math.round(Math.random()*2000)},
+                        {name: '锦州市',value: Math.round(Math.random()*2000)},
+                        {name: '阜新市',value: Math.round(Math.random()*2000)},
+                        {name: '盘锦市',value: 0},
+                        {name: '沈阳市',value: Math.round(Math.random()*2000)},
+                        {name: '铁岭市',value: 5},
+                        {name: '抚顺市',value: 305},
+                        {name: '本溪市',value: Math.round(Math.random()*2000)},
+                        {name: '丹东市',value: 200},
+                        {name: '鞍山市',value: Math.round(Math.random()*2000)},
+                        {name: '辽阳市',value: 305},
+                        {name: '大连市',value: Math.round(Math.random()*2000)},
+                        {name: '营口市',value: 200},
+                        
+                        
+                        
+                    ]
+                }
+            ]
+        };
+        
+        var option7 = {
+            title : {
+                // text: '订单量',
+                // subtext: '纯属虚构',
+                x:'center'
+            },
+            tooltip : { //提示框组件。
+                trigger: 'item' //数据项图形触发，主要在散点图，饼图等无类目轴的图表中使用。
+            },
+            legend: {
+                orient: 'horizontal', //图例的排列方向
+                x:'left', //图例的位置
+                data:['订单量']
+            },
+
+            visualMap: {//颜色的设置  dataRange
+                x: 'left',
+                y: 'center',
+                splitList: [
+                    {start: 1500},
+                    {start: 900, end: 1500},
+                    {start: 310, end: 1000},
+                    {start: 200, end: 300},
+                    {start: 10, end: 200, label: '10 到 200（自定义label）'},
+                    {start: 5, end: 5, label: '5（自定义特殊颜色）', color: '#077FBA'},
+                    {end: 10}
+                ],
+//            min: 0,
+//            max: 2500,
+//            calculable : true,//颜色呈条状
+                text:['高','低'],// 文本，默认为数值文本
+                // color: ['#E0022B', '#E09107', '#A3E00B']
+                color: ['#C1D3E3', '#077FBA', '#C9514C']
+            },
+            toolbox: {//工具栏
+                show: false,
+                orient : 'vertical',//工具栏 icon 的布局朝向
+                x: 'right',
+                y: 'center',
+                feature : {//各工具配置项。
+                    mark : {show: true},
+                    dataView : {show: true, readOnly: false},//数据视图工具，可以展现当前图表所用的数据，编辑后可以动态更新。
+                    restore : {show: true},//配置项还原。
+                    saveAsImage : {show: true}//保存为图片。
+                }
+            },
+            roamController: {//控制地图的上下左右放大缩小 图上没有显示
+                show: true,
+                x: 'right',
+                mapTypeControl: {
+                    'china': true
+                }
+            },
+            series : [
+                {
+                    name: '案件量',
+                    type: 'map',
+                    mapType: '吉林',
+                    roam: false,//是否开启鼠标缩放和平移漫游
+                    itemStyle:{//地图区域的多边形 图形样式
+                        normal:{//是图形在默认状态下的样式
+                            label:{
+                                show:false,//是否显示标签
+                                textStyle: {
+                                    color: "rgb(249, 249, 249)"
+                                }
+                            }
+                        },
+                        emphasis:{//是图形在高亮状态下的样式,比如在鼠标悬浮或者图例联动高亮时
+                            label:{show:true}
+                        }
+                    },
+                    top:"3%",//组件距离容器的距离
+                    data:[
+                        {name: '吉林市',value: Math.round(Math.random()*2000)},
+                        {name: '长春市',value: Math.round(Math.random()*2000)},
+                        {name: '白山市',value: Math.round(Math.random()*2000)},
+                        {name: '白城市',value: Math.round(Math.random()*2000)},
+                        {name: '延边州',value: 0},
+                        {name: '松原市',value: Math.round(Math.random()*2000)},
+                        {name: '辽源市',value: 5},
+                        {name: '通化市',value: 305},
+                        {name: '四平市',value: Math.round(Math.random()*2000)},
+                       
+    
+                        
+                    ]
+                }
+            ]
+        };
+
+
+        var option8 = {
+            title : {
+                // text: '订单量',
+                // subtext: '纯属虚构',
+                x:'center'
+            },
+            tooltip : { //提示框组件。
+                trigger: 'item' //数据项图形触发，主要在散点图，饼图等无类目轴的图表中使用。
+            },
+            legend: {
+                orient: 'horizontal', //图例的排列方向
+                x:'left', //图例的位置
+                data:['订单量']
+            },
+
+            visualMap: {//颜色的设置  dataRange
+                x: 'left',
+                y: 'center',
+                splitList: [
+                    {start: 1500},
+                    {start: 900, end: 1500},
+                    {start: 310, end: 1000},
+                    {start: 200, end: 300},
+                    {start: 10, end: 200, label: '10 到 200（自定义label）'},
+                    {start: 5, end: 5, label: '5（自定义特殊颜色）', color: '#077FBA'},
+                    {end: 10}
+                ],
+//            min: 0,
+//            max: 2500,
+//            calculable : true,//颜色呈条状
+                text:['高','低'],// 文本，默认为数值文本
+                // color: ['#E0022B', '#E09107', '#A3E00B']
+                color: ['#C1D3E3', '#077FBA', '#C9514C']
+            },
+            toolbox: {//工具栏
+                show: false,
+                orient : 'vertical',//工具栏 icon 的布局朝向
+                x: 'right',
+                y: 'center',
+                feature : {//各工具配置项。
+                    mark : {show: true},
+                    dataView : {show: true, readOnly: false},//数据视图工具，可以展现当前图表所用的数据，编辑后可以动态更新。
+                    restore : {show: true},//配置项还原。
+                    saveAsImage : {show: true}//保存为图片。
+                }
+            },
+            roamController: {//控制地图的上下左右放大缩小 图上没有显示
+                show: true,
+                x: 'right',
+                mapTypeControl: {
+                    'china': true
+                }
+            },
+            series : [
+                {
+                    name: '案件量',
+                    type: 'map',
+                    mapType: '黑龙江',
+                    roam: false,//是否开启鼠标缩放和平移漫游
+                    itemStyle:{//地图区域的多边形 图形样式
+                        normal:{//是图形在默认状态下的样式
+                            label:{
+                                show:false,//是否显示标签
+                                textStyle: {
+                                    color: "rgb(249, 249, 249)"
+                                }
+                            }
+                        },
+                        emphasis:{//是图形在高亮状态下的样式,比如在鼠标悬浮或者图例联动高亮时
+                            label:{show:true}
+                        }
+                    },
+                    top:"3%",//组件距离容器的距离
+                    data:[　
+                        {name: '齐齐哈尔市',value: Math.round(Math.random()*2000)},
+                        {name: '哈尔滨市',value: Math.round(Math.random()*2000)},
+                        {name: '大庆市',value: Math.round(Math.random()*2000)},
+                        {name: '佳木斯市',value: Math.round(Math.random()*2000)},
+                        {name: '双鸭山市',value: 0},
+                        {name: '牡丹江市',value: Math.round(Math.random()*2000)},
+                        {name: '鸡西市',value: 5},
+                        {name: '黑河市',value: 305},
+                        {name: '绥化市',value: Math.round(Math.random()*2000)},
+                        {name: '鹤岗市',value: 5},
+                        {name: '伊春市',value: 305},
+                        {name: '大兴安岭地区',value: Math.round(Math.random()*2000)},
+                        {name: '七台河市',value: Math.round(Math.random()*2000)},
+    
+                        
+                    ]
+                }
+            ]
+        };
+
+
+        var option9 = {
+            title : {
+                // text: '订单量',
+                // subtext: '纯属虚构',
+                x:'center'
+            },
+            tooltip : { //提示框组件。
+                trigger: 'item' //数据项图形触发，主要在散点图，饼图等无类目轴的图表中使用。
+            },
+            legend: {
+                orient: 'horizontal', //图例的排列方向
+                x:'left', //图例的位置
+                data:['订单量']
+            },
+
+            visualMap: {//颜色的设置  dataRange
+                x: 'left',
+                y: 'center',
+                splitList: [
+                    {start: 1500},
+                    {start: 900, end: 1500},
+                    {start: 310, end: 1000},
+                    {start: 200, end: 300},
+                    {start: 10, end: 200, label: '10 到 200（自定义label）'},
+                    {start: 5, end: 5, label: '5（自定义特殊颜色）', color: '#077FBA'},
+                    {end: 10}
+                ],
+//            min: 0,
+//            max: 2500,
+//            calculable : true,//颜色呈条状
+                text:['高','低'],// 文本，默认为数值文本
+                // color: ['#E0022B', '#E09107', '#A3E00B']
+                color: ['#C1D3E3', '#077FBA', '#C9514C']
+            },
+            toolbox: {//工具栏
+                show: false,
+                orient : 'vertical',//工具栏 icon 的布局朝向
+                x: 'right',
+                y: 'center',
+                feature : {//各工具配置项。
+                    mark : {show: true},
+                    dataView : {show: true, readOnly: false},//数据视图工具，可以展现当前图表所用的数据，编辑后可以动态更新。
+                    restore : {show: true},//配置项还原。
+                    saveAsImage : {show: true}//保存为图片。
+                }
+            },
+            roamController: {//控制地图的上下左右放大缩小 图上没有显示
+                show: true,
+                x: 'right',
+                mapTypeControl: {
+                    'china': true
+                }
+            },
+            series : [
+                {
+                    name: '案件量',
+                    type: 'map',
+                    mapType: '江苏',
+                    roam: false,//是否开启鼠标缩放和平移漫游
+                    itemStyle:{//地图区域的多边形 图形样式
+                        normal:{//是图形在默认状态下的样式
+                            label:{
+                                show:false,//是否显示标签
+                                textStyle: {
+                                    color: "rgb(249, 249, 249)"
+                                }
+                            }
+                        },
+                        emphasis:{//是图形在高亮状态下的样式,比如在鼠标悬浮或者图例联动高亮时
+                            label:{show:true}
+                        }
+                    },
+                    top:"3%",//组件距离容器的距离
+                    data:[　　
+                        {name: '苏州市',value: Math.round(Math.random()*2000)},
+                        {name: '徐州市',value: Math.round(Math.random()*2000)},
+                        {name: '大庆市',value: Math.round(Math.random()*2000)},
+                        {name: '盐城市',value: Math.round(Math.random()*2000)},
+                        {name: '无锡市',value: 0},
+                        {name: '南京市',value: Math.round(Math.random()*2000)},
+                        {name: '南通市',value: 5},
+                        {name: '连云港市',value: 305},
+                        {name: '常州市',value: Math.round(Math.random()*2000)},
+                        {name: '扬州市',value: 5},
+                        {name: '镇江市',value: 305},
+                        {name: '淮安市',value: Math.round(Math.random()*2000)},
+                        {name: '泰州市',value: Math.round(Math.random()*2000)},
+                        {name: '宿迁市',value: Math.round(Math.random()*2000)},
+    
+                        
+                    ]
+                }
+            ]
+        };
+
+
+
+        var option10 = {
+            title : {
+                // text: '订单量',
+                // subtext: '纯属虚构',
+                x:'center'
+            },
+            tooltip : { //提示框组件。
+                trigger: 'item' //数据项图形触发，主要在散点图，饼图等无类目轴的图表中使用。
+            },
+            legend: {
+                orient: 'horizontal', //图例的排列方向
+                x:'left', //图例的位置
+                data:['订单量']
+            },
+
+            visualMap: {//颜色的设置  dataRange
+                x: 'left',
+                y: 'center',
+                splitList: [
+                    {start: 1500},
+                    {start: 900, end: 1500},
+                    {start: 310, end: 1000},
+                    {start: 200, end: 300},
+                    {start: 10, end: 200, label: '10 到 200（自定义label）'},
+                    {start: 5, end: 5, label: '5（自定义特殊颜色）', color: '#077FBA'},
+                    {end: 10}
+                ],
+//            min: 0,
+//            max: 2500,
+//            calculable : true,//颜色呈条状
+                text:['高','低'],// 文本，默认为数值文本
+                // color: ['#E0022B', '#E09107', '#A3E00B']
+                color: ['#C1D3E3', '#077FBA', '#C9514C']
+            },
+            toolbox: {//工具栏
+                show: false,
+                orient : 'vertical',//工具栏 icon 的布局朝向
+                x: 'right',
+                y: 'center',
+                feature : {//各工具配置项。
+                    mark : {show: true},
+                    dataView : {show: true, readOnly: false},//数据视图工具，可以展现当前图表所用的数据，编辑后可以动态更新。
+                    restore : {show: true},//配置项还原。
+                    saveAsImage : {show: true}//保存为图片。
+                }
+            },
+            roamController: {//控制地图的上下左右放大缩小 图上没有显示
+                show: true,
+                x: 'right',
+                mapTypeControl: {
+                    'china': true
+                }
+            },
+            series : [
+                {
+                    name: '案件量',
+                    type: 'map',
+                    mapType: '浙江',
+                    roam: false,//是否开启鼠标缩放和平移漫游
+                    itemStyle:{//地图区域的多边形 图形样式
+                        normal:{//是图形在默认状态下的样式
+                            label:{
+                                show:false,//是否显示标签
+                                textStyle: {
+                                    color: "rgb(249, 249, 249)"
+                                }
+                            }
+                        },
+                        emphasis:{//是图形在高亮状态下的样式,比如在鼠标悬浮或者图例联动高亮时
+                            label:{show:true}
+                        }
+                    },
+                    top:"3%",//组件距离容器的距离
+                    data:[　
+                        {name: '温州市',value: Math.round(Math.random()*2000)},
+                        {name: '宁波市',value: Math.round(Math.random()*2000)},
+                        {name: '杭州市',value: Math.round(Math.random()*2000)},
+                        {name: '台州市',value: Math.round(Math.random()*2000)},
+                        {name: '嘉兴市',value: 0},
+                        {name: '金华市',value: Math.round(Math.random()*2000)},
+                        {name: '湖州市',value: 5},
+                        {name: '绍兴市',value: 305},
+                        {name: '舟山市',value: Math.round(Math.random()*2000)},
+                        {name: '丽水市',value: 5},
+                        {name: '衢州市',value: 305},
+                        
+    
+                        
+                    ]
+                }
+            ]
+        };
+
+
+        var option11 = {
+            title : {
+                // text: '订单量',
+                // subtext: '纯属虚构',
+                x:'center'
+            },
+            tooltip : { //提示框组件。
+                trigger: 'item' //数据项图形触发，主要在散点图，饼图等无类目轴的图表中使用。
+            },
+            legend: {
+                orient: 'horizontal', //图例的排列方向
+                x:'left', //图例的位置
+                data:['订单量']
+            },
+
+            visualMap: {//颜色的设置  dataRange
+                x: 'left',
+                y: 'center',
+                splitList: [
+                    {start: 1500},
+                    {start: 900, end: 1500},
+                    {start: 310, end: 1000},
+                    {start: 200, end: 300},
+                    {start: 10, end: 200, label: '10 到 200（自定义label）'},
+                    {start: 5, end: 5, label: '5（自定义特殊颜色）', color: '#077FBA'},
+                    {end: 10}
+                ],
+//            min: 0,
+//            max: 2500,
+//            calculable : true,//颜色呈条状
+                text:['高','低'],// 文本，默认为数值文本
+                // color: ['#E0022B', '#E09107', '#A3E00B']
+                color: ['#C1D3E3', '#077FBA', '#C9514C']
+            },
+            toolbox: {//工具栏
+                show: false,
+                orient : 'vertical',//工具栏 icon 的布局朝向
+                x: 'right',
+                y: 'center',
+                feature : {//各工具配置项。
+                    mark : {show: true},
+                    dataView : {show: true, readOnly: false},//数据视图工具，可以展现当前图表所用的数据，编辑后可以动态更新。
+                    restore : {show: true},//配置项还原。
+                    saveAsImage : {show: true}//保存为图片。
+                }
+            },
+            roamController: {//控制地图的上下左右放大缩小 图上没有显示
+                show: true,
+                x: 'right',
+                mapTypeControl: {
+                    'china': true
+                }
+            },
+            series : [
+                {
+                    name: '案件量',
+                    type: 'map',
+                    mapType: '安徽',
+                    roam: false,//是否开启鼠标缩放和平移漫游
+                    itemStyle:{//地图区域的多边形 图形样式
+                        normal:{//是图形在默认状态下的样式
+                            label:{
+                                show:false,//是否显示标签
+                                textStyle: {
+                                    color: "rgb(249, 249, 249)"
+                                }
+                            }
+                        },
+                        emphasis:{//是图形在高亮状态下的样式,比如在鼠标悬浮或者图例联动高亮时
+                            label:{show:true}
+                        }
+                    },
+                    top:"3%",//组件距离容器的距离
+                    data:[　
+                        {name: '芜湖市',value: Math.round(Math.random()*2000)},
+                        {name: '合肥市',value: Math.round(Math.random()*2000)},
+                        {name: '六安市',value: Math.round(Math.random()*2000)},
+                        {name: '宿州市',value: Math.round(Math.random()*2000)},
+                        {name: '阜阳市',value: 0},
+                        {name: '安庆市',value: Math.round(Math.random()*2000)},
+                        {name: '马鞍山市',value: 5},
+                        {name: '蚌埠市',value: 305},
+                        {name: '淮北市',value: Math.round(Math.random()*2000)},
+                        {name: '淮南市',value: 5},
+                        {name: '宣城市',value: 305},
+                        {name: '黄山市',value: Math.round(Math.random()*2000)},
+                        {name: '铜陵市',value: 5},
+                        {name: '亳州市',value: 305},
+                        {name: '池州市',value: Math.round(Math.random()*2000)},
+                        {name: '巢湖市',value: 5},
+                        {name: '滁州市',value: 305},
+                        
+    
+                        
+                    ]
+                }
+            ]
+        };
+        
+
+
+        var option12 = {
+            title : {
+                // text: '订单量',
+                // subtext: '纯属虚构',
+                x:'center'
+            },
+            tooltip : { //提示框组件。
+                trigger: 'item' //数据项图形触发，主要在散点图，饼图等无类目轴的图表中使用。
+            },
+            legend: {
+                orient: 'horizontal', //图例的排列方向
+                x:'left', //图例的位置
+                data:['订单量']
+            },
+
+            visualMap: {//颜色的设置  dataRange
+                x: 'left',
+                y: 'center',
+                splitList: [
+                    {start: 1500},
+                    {start: 900, end: 1500},
+                    {start: 310, end: 1000},
+                    {start: 200, end: 300},
+                    {start: 10, end: 200, label: '10 到 200（自定义label）'},
+                    {start: 5, end: 5, label: '5（自定义特殊颜色）', color: '#077FBA'},
+                    {end: 10}
+                ],
+//            min: 0,
+//            max: 2500,
+//            calculable : true,//颜色呈条状
+                text:['高','低'],// 文本，默认为数值文本
+                // color: ['#E0022B', '#E09107', '#A3E00B']
+                color: ['#C1D3E3', '#077FBA', '#C9514C']
+            },
+            toolbox: {//工具栏
+                show: false,
+                orient : 'vertical',//工具栏 icon 的布局朝向
+                x: 'right',
+                y: 'center',
+                feature : {//各工具配置项。
+                    mark : {show: true},
+                    dataView : {show: true, readOnly: false},//数据视图工具，可以展现当前图表所用的数据，编辑后可以动态更新。
+                    restore : {show: true},//配置项还原。
+                    saveAsImage : {show: true}//保存为图片。
+                }
+            },
+            roamController: {//控制地图的上下左右放大缩小 图上没有显示
+                show: true,
+                x: 'right',
+                mapTypeControl: {
+                    'china': true
+                }
+            },
+            series : [
+                {
+                    name: '案件量',
+                    type: 'map',
+                    mapType: '福建',
+                    roam: false,//是否开启鼠标缩放和平移漫游
+                    itemStyle:{//地图区域的多边形 图形样式
+                        normal:{//是图形在默认状态下的样式
+                            label:{
+                                show:false,//是否显示标签
+                                textStyle: {
+                                    color: "rgb(249, 249, 249)"
+                                }
+                            }
+                        },
+                        emphasis:{//是图形在高亮状态下的样式,比如在鼠标悬浮或者图例联动高亮时
+                            label:{show:true}
+                        }
+                    },
+                    top:"3%",//组件距离容器的距离
+                    data:[　
+                        {name: '漳州市',value: Math.round(Math.random()*2000)},
+                        {name: '泉州市',value: Math.round(Math.random()*2000)},
+                        {name: '厦门市',value: Math.round(Math.random()*2000)},
+                        {name: '福州市',value: Math.round(Math.random()*2000)},
+                        {name: '莆田市',value: 0},
+                        {name: '宁德市',value: Math.round(Math.random()*2000)},
+                        {name: '三明市',value: 5},
+                        {name: '南平市',value: 305},
+                        {name: '龙岩市',value: Math.round(Math.random()*2000)},
+                        
+                        
+    
+                        
+                    ]
+                }
+            ]
+        };
+
+        var option13 = {
+            title : {
+                // text: '订单量',
+                // subtext: '纯属虚构',
+                x:'center'
+            },
+            tooltip : { //提示框组件。
+                trigger: 'item' //数据项图形触发，主要在散点图，饼图等无类目轴的图表中使用。
+            },
+            legend: {
+                orient: 'horizontal', //图例的排列方向
+                x:'left', //图例的位置
+                data:['订单量']
+            },
+
+            visualMap: {//颜色的设置  dataRange
+                x: 'left',
+                y: 'center',
+                splitList: [
+                    {start: 1500},
+                    {start: 900, end: 1500},
+                    {start: 310, end: 1000},
+                    {start: 200, end: 300},
+                    {start: 10, end: 200, label: '10 到 200（自定义label）'},
+                    {start: 5, end: 5, label: '5（自定义特殊颜色）', color: '#077FBA'},
+                    {end: 10}
+                ],
+//            min: 0,
+//            max: 2500,
+//            calculable : true,//颜色呈条状
+                text:['高','低'],// 文本，默认为数值文本
+                // color: ['#E0022B', '#E09107', '#A3E00B']
+                color: ['#C1D3E3', '#077FBA', '#C9514C']
+            },
+            toolbox: {//工具栏
+                show: false,
+                orient : 'vertical',//工具栏 icon 的布局朝向
+                x: 'right',
+                y: 'center',
+                feature : {//各工具配置项。
+                    mark : {show: true},
+                    dataView : {show: true, readOnly: false},//数据视图工具，可以展现当前图表所用的数据，编辑后可以动态更新。
+                    restore : {show: true},//配置项还原。
+                    saveAsImage : {show: true}//保存为图片。
+                }
+            },
+            roamController: {//控制地图的上下左右放大缩小 图上没有显示
+                show: true,
+                x: 'right',
+                mapTypeControl: {
+                    'china': true
+                }
+            },
+            series : [
+                {
+                    name: '案件量',
+                    type: 'map',
+                    mapType: '江西',
+                    roam: false,//是否开启鼠标缩放和平移漫游
+                    itemStyle:{//地图区域的多边形 图形样式
+                        normal:{//是图形在默认状态下的样式
+                            label:{
+                                show:false,//是否显示标签
+                                textStyle: {
+                                    color: "rgb(249, 249, 249)"
+                                }
+                            }
+                        },
+                        emphasis:{//是图形在高亮状态下的样式,比如在鼠标悬浮或者图例联动高亮时
+                            label:{show:true}
+                        }
+                    },
+                    top:"3%",//组件距离容器的距离
+                    data:[　
+                        {name: '南昌市',value: Math.round(Math.random()*2000)},
+                        {name: '赣州市',value: Math.round(Math.random()*2000)},
+                        {name: '上饶市',value: Math.round(Math.random()*2000)},
+                        {name: '吉安市',value: Math.round(Math.random()*2000)},
+                        {name: '九江市',value: 0},
+                        {name: '新余市',value: Math.round(Math.random()*2000)},
+                        {name: '抚州市',value: 5},
+                        {name: '宜春市',value: 305},
+                        {name: '景德镇市',value: Math.round(Math.random()*2000)},
+                        {name: '萍乡市',value: Math.round(Math.random()*2000)},
+                        {name: '鹰潭市',value: 5},
+                       
+                        
+                        
+    
+                        
+                    ]
+                }
+            ]
+        };
+
+
+
+        var option14 = {
+            title : {
+                // text: '订单量',
+                // subtext: '纯属虚构',
+                x:'center'
+            },
+            tooltip : { //提示框组件。
+                trigger: 'item' //数据项图形触发，主要在散点图，饼图等无类目轴的图表中使用。
+            },
+            legend: {
+                orient: 'horizontal', //图例的排列方向
+                x:'left', //图例的位置
+                data:['订单量']
+            },
+
+            visualMap: {//颜色的设置  dataRange
+                x: 'left',
+                y: 'center',
+                splitList: [
+                    {start: 1500},
+                    {start: 900, end: 1500},
+                    {start: 310, end: 1000},
+                    {start: 200, end: 300},
+                    {start: 10, end: 200, label: '10 到 200（自定义label）'},
+                    {start: 5, end: 5, label: '5（自定义特殊颜色）', color: '#077FBA'},
+                    {end: 10}
+                ],
+//            min: 0,
+//            max: 2500,
+//            calculable : true,//颜色呈条状
+                text:['高','低'],// 文本，默认为数值文本
+                // color: ['#E0022B', '#E09107', '#A3E00B']
+                color: ['#C1D3E3', '#077FBA', '#C9514C']
+            },
+            toolbox: {//工具栏
+                show: false,
+                orient : 'vertical',//工具栏 icon 的布局朝向
+                x: 'right',
+                y: 'center',
+                feature : {//各工具配置项。
+                    mark : {show: true},
+                    dataView : {show: true, readOnly: false},//数据视图工具，可以展现当前图表所用的数据，编辑后可以动态更新。
+                    restore : {show: true},//配置项还原。
+                    saveAsImage : {show: true}//保存为图片。
+                }
+            },
+            roamController: {//控制地图的上下左右放大缩小 图上没有显示
+                show: true,
+                x: 'right',
+                mapTypeControl: {
+                    'china': true
+                }
+            },
+            series : [
+                {
+                    name: '案件量',
+                    type: 'map',
+                    mapType: '山东',
+                    roam: false,//是否开启鼠标缩放和平移漫游
+                    itemStyle:{//地图区域的多边形 图形样式
+                        normal:{//是图形在默认状态下的样式
+                            label:{
+                                show:false,//是否显示标签
+                                textStyle: {
+                                    color: "rgb(249, 249, 249)"
+                                }
+                            }
+                        },
+                        emphasis:{//是图形在高亮状态下的样式,比如在鼠标悬浮或者图例联动高亮时
+                            label:{show:true}
+                        }
+                    },
+                    top:"3%",//组件距离容器的距离
+                    data:[　
+                        {name: '济南市',value: Math.round(Math.random()*2000)},
+                        {name: '青岛市',value: Math.round(Math.random()*2000)},
+                        {name: '临沂市',value: Math.round(Math.random()*2000)},
+                        {name: '济宁市',value: Math.round(Math.random()*2000)},
+                        {name: '菏泽市',value: 0},
+                        {name: '烟台市',value: Math.round(Math.random()*2000)},
+                        {name: '泰安市',value: 5},
+                        {name: '淄博市',value: 305},
+                        {name: '潍坊市',value: Math.round(Math.random()*2000)},
+                        {name: '日照市',value: Math.round(Math.random()*2000)},
+                        {name: '威海',value: 5},
+                        {name: '滨州市',value: 305},
+                        {name: '东营市',value: Math.round(Math.random()*2000)},
+                        {name: '聊城市',value: Math.round(Math.random()*2000)},
+                        {name: '德州市',value: 5},
+                        {name: '莱芜市',value: Math.round(Math.random()*2000)},
+                        {name: '枣庄市',value: 5},
+                       
+                        
+                        
+    
+                        
+                    ]
+                }
+            ]
+        };
+
+
+        var option15 = {
+            title : {
+                // text: '订单量',
+                // subtext: '纯属虚构',
+                x:'center'
+            },
+            tooltip : { //提示框组件。
+                trigger: 'item' //数据项图形触发，主要在散点图，饼图等无类目轴的图表中使用。
+            },
+            legend: {
+                orient: 'horizontal', //图例的排列方向
+                x:'left', //图例的位置
+                data:['订单量']
+            },
+
+            visualMap: {//颜色的设置  dataRange
+                x: 'left',
+                y: 'center',
+                splitList: [
+                    {start: 1500},
+                    {start: 900, end: 1500},
+                    {start: 310, end: 1000},
+                    {start: 200, end: 300},
+                    {start: 10, end: 200, label: '10 到 200（自定义label）'},
+                    {start: 5, end: 5, label: '5（自定义特殊颜色）', color: '#077FBA'},
+                    {end: 10}
+                ],
+//            min: 0,
+//            max: 2500,
+//            calculable : true,//颜色呈条状
+                text:['高','低'],// 文本，默认为数值文本
+                // color: ['#E0022B', '#E09107', '#A3E00B']
+                color: ['#C1D3E3', '#077FBA', '#C9514C']
+            },
+            toolbox: {//工具栏
+                show: false,
+                orient : 'vertical',//工具栏 icon 的布局朝向
+                x: 'right',
+                y: 'center',
+                feature : {//各工具配置项。
+                    mark : {show: true},
+                    dataView : {show: true, readOnly: false},//数据视图工具，可以展现当前图表所用的数据，编辑后可以动态更新。
+                    restore : {show: true},//配置项还原。
+                    saveAsImage : {show: true}//保存为图片。
+                }
+            },
+            roamController: {//控制地图的上下左右放大缩小 图上没有显示
+                show: true,
+                x: 'right',
+                mapTypeControl: {
+                    'china': true
+                }
+            },
+            series : [
+                {
+                    name: '案件量',
+                    type: 'map',
+                    mapType: '河南',
+                    roam: false,//是否开启鼠标缩放和平移漫游
+                    itemStyle:{//地图区域的多边形 图形样式
+                        normal:{//是图形在默认状态下的样式
+                            label:{
+                                show:false,//是否显示标签
+                                textStyle: {
+                                    color: "rgb(249, 249, 249)"
+                                }
+                            }
+                        },
+                        emphasis:{//是图形在高亮状态下的样式,比如在鼠标悬浮或者图例联动高亮时
+                            label:{show:true}
+                        }
+                    },
+                    top:"3%",//组件距离容器的距离
+                    data:[ 
+                        {name: '郑州市',value: Math.round(Math.random()*2000)},
+                        {name: '南阳市',value: Math.round(Math.random()*2000)},
+                        {name: '新乡市',value: Math.round(Math.random()*2000)},
+                        {name: '安阳市',value: Math.round(Math.random()*2000)},
+                        {name: '洛阳市',value: 0},
+                        {name: '信阳市',value: Math.round(Math.random()*2000)},
+                        {name: '平顶山市',value: 5},
+                        {name: '周口市',value: 305},
+                        {name: '商丘市',value: Math.round(Math.random()*2000)},
+                        {name: '开封市',value: Math.round(Math.random()*2000)},
+                        {name: '焦作市',value: 5},
+                        {name: '驻马店市',value: 305},
+                        {name: '濮阳市',value: Math.round(Math.random()*2000)},
+                        {name: '三门峡市',value: Math.round(Math.random()*2000)},
+                        {name: '漯河市',value: 5},
+                        {name: '许昌市',value: Math.round(Math.random()*2000)},
+                        {name: '鹤壁市',value: 5},
+                        {name: '济源市',value: 5},
+                       
+                        
+                        
+    
+                        
+                    ]
+                }
+            ]
+        };
+
+        var option16 = {
+            title : {
+                // text: '订单量',
+                // subtext: '纯属虚构',
+                x:'center'
+            },
+            tooltip : { //提示框组件。
+                trigger: 'item' //数据项图形触发，主要在散点图，饼图等无类目轴的图表中使用。
+            },
+            legend: {
+                orient: 'horizontal', //图例的排列方向
+                x:'left', //图例的位置
+                data:['订单量']
+            },
+
+            visualMap: {//颜色的设置  dataRange
+                x: 'left',
+                y: 'center',
+                splitList: [
+                    {start: 1500},
+                    {start: 900, end: 1500},
+                    {start: 310, end: 1000},
+                    {start: 200, end: 300},
+                    {start: 10, end: 200, label: '10 到 200（自定义label）'},
+                    {start: 5, end: 5, label: '5（自定义特殊颜色）', color: '#077FBA'},
+                    {end: 10}
+                ],
+//            min: 0,
+//            max: 2500,
+//            calculable : true,//颜色呈条状
+                text:['高','低'],// 文本，默认为数值文本
+                // color: ['#E0022B', '#E09107', '#A3E00B']
+                color: ['#C1D3E3', '#077FBA', '#C9514C']
+            },
+            toolbox: {//工具栏
+                show: false,
+                orient : 'vertical',//工具栏 icon 的布局朝向
+                x: 'right',
+                y: 'center',
+                feature : {//各工具配置项。
+                    mark : {show: true},
+                    dataView : {show: true, readOnly: false},//数据视图工具，可以展现当前图表所用的数据，编辑后可以动态更新。
+                    restore : {show: true},//配置项还原。
+                    saveAsImage : {show: true}//保存为图片。
+                }
+            },
+            roamController: {//控制地图的上下左右放大缩小 图上没有显示
+                show: true,
+                x: 'right',
+                mapTypeControl: {
+                    'china': true
+                }
+            },
+            series : [
+                {
+                    name: '案件量',
+                    type: 'map',
+                    mapType: '湖北',
+                    roam: false,//是否开启鼠标缩放和平移漫游
+                    itemStyle:{//地图区域的多边形 图形样式
+                        normal:{//是图形在默认状态下的样式
+                            label:{
+                                show:false,//是否显示标签
+                                textStyle: {
+                                    color: "rgb(249, 249, 249)"
+                                }
+                            }
+                        },
+                        emphasis:{//是图形在高亮状态下的样式,比如在鼠标悬浮或者图例联动高亮时
+                            label:{show:true}
+                        }
+                    },
+                    top:"3%",//组件距离容器的距离
+                    data:[ 
+                        {name: '武汉市',value: Math.round(Math.random()*2000)},
+                        {name: '宜昌市',value: Math.round(Math.random()*2000)},
+                        {name: '襄樊市',value: Math.round(Math.random()*2000)},
+                        {name: '荆州市',value: Math.round(Math.random()*2000)},
+                        {name: '恩施州',value: 0},
+                        {name: '孝感市',value: Math.round(Math.random()*2000)},
+                        {name: '黄冈市',value: 5},
+                        {name: '十堰市',value: 305},
+                        {name: '咸宁市',value: Math.round(Math.random()*2000)},
+                        {name: '黄石市',value: Math.round(Math.random()*2000)},
+                        {name: '仙桃市',value: 5},
+                        {name: '随州市',value: 305},
+                        {name: '天门市',value: Math.round(Math.random()*2000)},
+                        {name: '荆门市',value: Math.round(Math.random()*2000)},
+                        {name: '潜江市',value: 5},
+                        {name: '鄂州市',value: Math.round(Math.random()*2000)},
+                        {name: '神农架林区',value: 5},
+                        
+                       
+                        
+                        
+    
+                        
+                    ]
+                }
+            ]
+        };
+
+        
+         var option17 = {
+            title : {
+                // text: '订单量',
+                // subtext: '纯属虚构',
+                x:'center'
+            },
+            tooltip : { //提示框组件。
+                trigger: 'item' //数据项图形触发，主要在散点图，饼图等无类目轴的图表中使用。
+            },
+            legend: {
+                orient: 'horizontal', //图例的排列方向
+                x:'left', //图例的位置
+                data:['订单量']
+            },
+
+            visualMap: {//颜色的设置  dataRange
+                x: 'left',
+                y: 'center',
+                splitList: [
+                    {start: 1500},
+                    {start: 900, end: 1500},
+                    {start: 310, end: 1000},
+                    {start: 200, end: 300},
+                    {start: 10, end: 200, label: '10 到 200（自定义label）'},
+                    {start: 5, end: 5, label: '5（自定义特殊颜色）', color: '#077FBA'},
+                    {end: 10}
+                ],
+//            min: 0,
+//            max: 2500,
+//            calculable : true,//颜色呈条状
+                text:['高','低'],// 文本，默认为数值文本
+                // color: ['#E0022B', '#E09107', '#A3E00B']
+                color: ['#C1D3E3', '#077FBA', '#C9514C']
+            },
+            toolbox: {//工具栏
+                show: false,
+                orient : 'vertical',//工具栏 icon 的布局朝向
+                x: 'right',
+                y: 'center',
+                feature : {//各工具配置项。
+                    mark : {show: true},
+                    dataView : {show: true, readOnly: false},//数据视图工具，可以展现当前图表所用的数据，编辑后可以动态更新。
+                    restore : {show: true},//配置项还原。
+                    saveAsImage : {show: true}//保存为图片。
+                }
+            },
+            roamController: {//控制地图的上下左右放大缩小 图上没有显示
+                show: true,
+                x: 'right',
+                mapTypeControl: {
+                    'china': true
+                }
+            },
+            series : [
+                {
+                    name: '案件量',
+                    type: 'map',
+                    mapType: '湖南',
+                    roam: false,//是否开启鼠标缩放和平移漫游
+                    itemStyle:{//地图区域的多边形 图形样式
+                        normal:{//是图形在默认状态下的样式
+                            label:{
+                                show:false,//是否显示标签
+                                textStyle: {
+                                    color: "rgb(249, 249, 249)"
+                                }
+                            }
+                        },
+                        emphasis:{//是图形在高亮状态下的样式,比如在鼠标悬浮或者图例联动高亮时
+                            label:{show:true}
+                        }
+                    },
+                    top:"3%",//组件距离容器的距离
+                    data:[ 　
+                        {name: '长沙市',value: Math.round(Math.random()*2000)},
+                        {name: '邵阳市',value: Math.round(Math.random()*2000)},
+                        {name: '襄樊市',value: Math.round(Math.random()*2000)},
+                        {name: '常德市',value: Math.round(Math.random()*2000)},
+                        {name: '衡阳市',value: 0},
+                        {name: '株洲市',value: Math.round(Math.random()*2000)},
+                        {name: '湘潭市',value: 5},
+                        {name: '永州市',value: 305},
+                        {name: '岳阳市',value: Math.round(Math.random()*2000)},
+                        {name: '怀化市',value: Math.round(Math.random()*2000)},
+                        {name: '郴州市',value: 5},
+                        {name: '娄底市',value: 305},
+                        {name: '益阳市',value: Math.round(Math.random()*2000)},
+                        {name: '张家界市',value: Math.round(Math.random()*2000)},
+                        {name: '湘西州',value: 5},
+                     
+                        
+                       
+                        
+                        
+    
+                        
+                    ]
+                }
+            ]
+        };
+
+
+        var option18 = {
+            title : {
+                // text: '订单量',
+                // subtext: '纯属虚构',
+                x:'center'
+            },
+            tooltip : { //提示框组件。
+                trigger: 'item' //数据项图形触发，主要在散点图，饼图等无类目轴的图表中使用。
+            },
+            legend: {
+                orient: 'horizontal', //图例的排列方向
+                x:'left', //图例的位置
+                data:['订单量']
+            },
+
+            visualMap: {//颜色的设置  dataRange
+                x: 'left',
+                y: 'center',
+                splitList: [
+                    {start: 1500},
+                    {start: 900, end: 1500},
+                    {start: 310, end: 1000},
+                    {start: 200, end: 300},
+                    {start: 10, end: 200, label: '10 到 200（自定义label）'},
+                    {start: 5, end: 5, label: '5（自定义特殊颜色）', color: '#077FBA'},
+                    {end: 10}
+                ],
+//            min: 0,
+//            max: 2500,
+//            calculable : true,//颜色呈条状
+                text:['高','低'],// 文本，默认为数值文本
+                // color: ['#E0022B', '#E09107', '#A3E00B']
+                color: ['#C1D3E3', '#077FBA', '#C9514C']
+            },
+            toolbox: {//工具栏
+                show: false,
+                orient : 'vertical',//工具栏 icon 的布局朝向
+                x: 'right',
+                y: 'center',
+                feature : {//各工具配置项。
+                    mark : {show: true},
+                    dataView : {show: true, readOnly: false},//数据视图工具，可以展现当前图表所用的数据，编辑后可以动态更新。
+                    restore : {show: true},//配置项还原。
+                    saveAsImage : {show: true}//保存为图片。
+                }
+            },
+            roamController: {//控制地图的上下左右放大缩小 图上没有显示
+                show: true,
+                x: 'right',
+                mapTypeControl: {
+                    'china': true
+                }
+            },
+            series : [
+                {
+                    name: '案件量',
+                    type: 'map',
+                    mapType: '广东',
+                    roam: false,//是否开启鼠标缩放和平移漫游
+                    itemStyle:{//地图区域的多边形 图形样式
+                        normal:{//是图形在默认状态下的样式
+                            label:{
+                                show:false,//是否显示标签
+                                textStyle: {
+                                    color: "rgb(249, 249, 249)"
+                                }
+                            }
+                        },
+                        emphasis:{//是图形在高亮状态下的样式,比如在鼠标悬浮或者图例联动高亮时
+                            label:{show:true}
+                        }
+                    },
+                    top:"3%",//组件距离容器的距离
+                    data:[ 
+                        {name: '东莞市',value: Math.round(Math.random()*2000)},
+                        {name: '广州市',value: Math.round(Math.random()*2000)},
+                        {name: '中山市',value: Math.round(Math.random()*2000)},
+                        {name: '深圳市',value: Math.round(Math.random()*2000)},
+                        {name: '惠州市',value: 0},
+                        {name: '江门市',value: Math.round(Math.random()*2000)},
+                        {name: '珠海市',value: 5},
+                        {name: '汕头市',value: 305},
+                        {name: '佛山市',value: Math.round(Math.random()*2000)},
+                        {name: '湛江市',value: Math.round(Math.random()*2000)},
+                        {name: '河源市',value: 5},
+                        {name: '肇庆市',value: 305},
+                        {name: '潮州市',value: Math.round(Math.random()*2000)},
+                        {name: '清远市',value: Math.round(Math.random()*2000)},
+                        {name: '韶关市',value: 5},
+                        {name: '揭阳市',value: Math.round(Math.random()*2000)},
+                        {name: '阳江市',value: Math.round(Math.random()*2000)},
+                        {name: '云浮市',value: 5},
+                        {name: '茂名市',value: 305},
+                        {name: '梅州市',value: Math.round(Math.random()*2000)},
+                        {name: '汕尾市',value: Math.round(Math.random()*2000)},
+
+                    
+                        
+                    ]
+                }
+            ]
+        };
+
+                var option19 = {
+            title : {
+                // text: '订单量',
+                // subtext: '纯属虚构',
+                x:'center'
+            },
+            tooltip : { //提示框组件。
+                trigger: 'item' //数据项图形触发，主要在散点图，饼图等无类目轴的图表中使用。
+            },
+            legend: {
+                orient: 'horizontal', //图例的排列方向
+                x:'left', //图例的位置
+                data:['订单量']
+            },
+
+            visualMap: {//颜色的设置  dataRange
+                x: 'left',
+                y: 'center',
+                splitList: [
+                    {start: 1500},
+                    {start: 900, end: 1500},
+                    {start: 310, end: 1000},
+                    {start: 200, end: 300},
+                    {start: 10, end: 200, label: '10 到 200（自定义label）'},
+                    {start: 5, end: 5, label: '5（自定义特殊颜色）', color: '#077FBA'},
+                    {end: 10}
+                ],
+//            min: 0,
+//            max: 2500,
+//            calculable : true,//颜色呈条状
+                text:['高','低'],// 文本，默认为数值文本
+                // color: ['#E0022B', '#E09107', '#A3E00B']
+                color: ['#C1D3E3', '#077FBA', '#C9514C']
+            },
+            toolbox: {//工具栏
+                show: false,
+                orient : 'vertical',//工具栏 icon 的布局朝向
+                x: 'right',
+                y: 'center',
+                feature : {//各工具配置项。
+                    mark : {show: true},
+                    dataView : {show: true, readOnly: false},//数据视图工具，可以展现当前图表所用的数据，编辑后可以动态更新。
+                    restore : {show: true},//配置项还原。
+                    saveAsImage : {show: true}//保存为图片。
+                }
+            },
+            roamController: {//控制地图的上下左右放大缩小 图上没有显示
+                show: true,
+                x: 'right',
+                mapTypeControl: {
+                    'china': true
+                }
+            },
+            series : [
+                {
+                    name: '案件量',
+                    type: 'map',
+                    mapType: '广西',
+                    roam: false,//是否开启鼠标缩放和平移漫游
+                    itemStyle:{//地图区域的多边形 图形样式
+                        normal:{//是图形在默认状态下的样式
+                            label:{
+                                show:false,//是否显示标签
+                                textStyle: {
+                                    color: "rgb(249, 249, 249)"
+                                }
+                            }
+                        },
+                        emphasis:{//是图形在高亮状态下的样式,比如在鼠标悬浮或者图例联动高亮时
+                            label:{show:true}
+                        }
+                    },
+                    top:"3%",//组件距离容器的距离
+                    data:[ 
+                        {name: '贵港市',value: Math.round(Math.random()*2000)},
+                        {name: '玉林市',value: Math.round(Math.random()*2000)},
+                        {name: '北海市',value: Math.round(Math.random()*2000)},
+                        {name: '南宁市',value: Math.round(Math.random()*2000)},
+                        {name: '柳州市',value: 0},
+                        {name: '桂林市',value: Math.round(Math.random()*2000)},
+                        {name: '梧州市',value: 5},
+                        {name: '钦州市',value: 305},
+                        {name: '来宾市',value: Math.round(Math.random()*2000)},
+                        {name: '河池市',value: Math.round(Math.random()*2000)},
+                        {name: '百色市',value: 5},
+                        {name: '贺州市',value: 305},
+                        {name: '崇左市',value: Math.round(Math.random()*2000)},
+                        {name: '防城港市',value: Math.round(Math.random()*2000)},
+                        
+
+                    
+                        
+                    ]
+                }
+            ]
+        };
+
+
+             var option20 = {
+            title : {
+                // text: '订单量',
+                // subtext: '纯属虚构',
+                x:'center'
+            },
+            tooltip : { //提示框组件。
+                trigger: 'item' //数据项图形触发，主要在散点图，饼图等无类目轴的图表中使用。
+            },
+            legend: {
+                orient: 'horizontal', //图例的排列方向
+                x:'left', //图例的位置
+                data:['订单量']
+            },
+
+            visualMap: {//颜色的设置  dataRange
+                x: 'left',
+                y: 'center',
+                splitList: [
+                    {start: 1500},
+                    {start: 900, end: 1500},
+                    {start: 310, end: 1000},
+                    {start: 200, end: 300},
+                    {start: 10, end: 200, label: '10 到 200（自定义label）'},
+                    {start: 5, end: 5, label: '5（自定义特殊颜色）', color: '#077FBA'},
+                    {end: 10}
+                ],
+//            min: 0,
+//            max: 2500,
+//            calculable : true,//颜色呈条状
+                text:['高','低'],// 文本，默认为数值文本
+                // color: ['#E0022B', '#E09107', '#A3E00B']
+                color: ['#C1D3E3', '#077FBA', '#C9514C']
+            },
+            toolbox: {//工具栏
+                show: false,
+                orient : 'vertical',//工具栏 icon 的布局朝向
+                x: 'right',
+                y: 'center',
+                feature : {//各工具配置项。
+                    mark : {show: true},
+                    dataView : {show: true, readOnly: false},//数据视图工具，可以展现当前图表所用的数据，编辑后可以动态更新。
+                    restore : {show: true},//配置项还原。
+                    saveAsImage : {show: true}//保存为图片。
+                }
+            },
+            roamController: {//控制地图的上下左右放大缩小 图上没有显示
+                show: true,
+                x: 'right',
+                mapTypeControl: {
+                    'china': true
+                }
+            },
+            series : [
+                {
+                    name: '案件量',
+                    type: 'map',
+                    mapType: '海南',
+                    roam: false,//是否开启鼠标缩放和平移漫游
+                    itemStyle:{//地图区域的多边形 图形样式
+                        normal:{//是图形在默认状态下的样式
+                            label:{
+                                show:false,//是否显示标签
+                                textStyle: {
+                                    color: "rgb(249, 249, 249)"
+                                }
+                            }
+                        },
+                        emphasis:{//是图形在高亮状态下的样式,比如在鼠标悬浮或者图例联动高亮时
+                            label:{show:true}
+                        }
+                    },
+                    top:"3%",//组件距离容器的距离
+                    data:[ 
+                        {name: '三亚市',value: Math.round(Math.random()*2000)},
+                        {name: '海口市',value: Math.round(Math.random()*2000)},
+                        {name: '琼海市',value: Math.round(Math.random()*2000)},
+                        {name: '文昌市',value: Math.round(Math.random()*2000)},
+                        {name: '东方市',value: 0},
+                        {name: '昌江县',value: Math.round(Math.random()*2000)},
+                        {name: '陵水县',value: 5},
+                        {name: '乐东县',value: 305},
+                        {name: '五指山市',value: Math.round(Math.random()*2000)},
+                        {name: '保亭县',value: Math.round(Math.random()*2000)},
+                        {name: '澄迈县',value: 5},
+                        {name: '万宁市',value: 305},
+                        {name: '儋州市',value: Math.round(Math.random()*2000)},
+                        {name: '临高县',value: Math.round(Math.random()*2000)},
+
+                        {name: '白沙县',value: Math.round(Math.random()*2000)},
+                        {name: '定安县',value: Math.round(Math.random()*2000)},
+                        {name: '琼中县',value: 5},
+                        {name: '屯昌县',value: 305},
+                        
+                        
+
+                    
+                        
+                    ]
+                }
+            ]
+        };
+
+
+              var option21 = {
+            title : {
+                // text: '订单量',
+                // subtext: '纯属虚构',
+                x:'center'
+            },
+            tooltip : { //提示框组件。
+                trigger: 'item' //数据项图形触发，主要在散点图，饼图等无类目轴的图表中使用。
+            },
+            legend: {
+                orient: 'horizontal', //图例的排列方向
+                x:'left', //图例的位置
+                data:['订单量']
+            },
+
+            visualMap: {//颜色的设置  dataRange
+                x: 'left',
+                y: 'center',
+                splitList: [
+                    {start: 1500},
+                    {start: 900, end: 1500},
+                    {start: 310, end: 1000},
+                    {start: 200, end: 300},
+                    {start: 10, end: 200, label: '10 到 200（自定义label）'},
+                    {start: 5, end: 5, label: '5（自定义特殊颜色）', color: '#077FBA'},
+                    {end: 10}
+                ],
+//            min: 0,
+//            max: 2500,
+//            calculable : true,//颜色呈条状
+                text:['高','低'],// 文本，默认为数值文本
+                // color: ['#E0022B', '#E09107', '#A3E00B']
+                color: ['#C1D3E3', '#077FBA', '#C9514C']
+            },
+            toolbox: {//工具栏
+                show: false,
+                orient : 'vertical',//工具栏 icon 的布局朝向
+                x: 'right',
+                y: 'center',
+                feature : {//各工具配置项。
+                    mark : {show: true},
+                    dataView : {show: true, readOnly: false},//数据视图工具，可以展现当前图表所用的数据，编辑后可以动态更新。
+                    restore : {show: true},//配置项还原。
+                    saveAsImage : {show: true}//保存为图片。
+                }
+            },
+            roamController: {//控制地图的上下左右放大缩小 图上没有显示
+                show: true,
+                x: 'right',
+                mapTypeControl: {
+                    'china': true
+                }
+            },
+            series : [
+                {
+                    name: '案件量',
+                    type: 'map',
+                    mapType: '贵州',
+                    roam: false,//是否开启鼠标缩放和平移漫游
+                    itemStyle:{//地图区域的多边形 图形样式
+                        normal:{//是图形在默认状态下的样式
+                            label:{
+                                show:false,//是否显示标签
+                                textStyle: {
+                                    color: "rgb(249, 249, 249)"
+                                }
+                            }
+                        },
+                        emphasis:{//是图形在高亮状态下的样式,比如在鼠标悬浮或者图例联动高亮时
+                            label:{show:true}
+                        }
+                    },
+                    top:"3%",//组件距离容器的距离
+                    data:[ 
+                        {name: '贵阳市',value: Math.round(Math.random()*2000)},
+                        {name: '黔东南州',value: Math.round(Math.random()*2000)},
+                        {name: '黔南州',value: Math.round(Math.random()*2000)},
+                        {name: '遵义市',value: Math.round(Math.random()*2000)},
+                        {name: '黔西南州',value: 0},
+                        {name: '毕节地区',value: Math.round(Math.random()*2000)},
+                        {name: '铜仁地区',value: 5},
+                        {name: '安顺市',value: 305},
+                        {name: '六盘水市',value: Math.round(Math.random()*2000)},
+                        
+                        
+                        
+
+                    
+                        
+                    ]
+                }
+            ]
+        };
+
+
+            var option22 = {
+            title : {
+                // text: '订单量',
+                // subtext: '纯属虚构',
+                x:'center'
+            },
+            tooltip : { //提示框组件。
+                trigger: 'item' //数据项图形触发，主要在散点图，饼图等无类目轴的图表中使用。
+            },
+            legend: {
+                orient: 'horizontal', //图例的排列方向
+                x:'left', //图例的位置
+                data:['订单量']
+            },
+
+            visualMap: {//颜色的设置  dataRange
+                x: 'left',
+                y: 'center',
+                splitList: [
+                    {start: 1500},
+                    {start: 900, end: 1500},
+                    {start: 310, end: 1000},
+                    {start: 200, end: 300},
+                    {start: 10, end: 200, label: '10 到 200（自定义label）'},
+                    {start: 5, end: 5, label: '5（自定义特殊颜色）', color: '#077FBA'},
+                    {end: 10}
+                ],
+//            min: 0,
+//            max: 2500,
+//            calculable : true,//颜色呈条状
+                text:['高','低'],// 文本，默认为数值文本
+                // color: ['#E0022B', '#E09107', '#A3E00B']
+                color: ['#C1D3E3', '#077FBA', '#C9514C']
+            },
+            toolbox: {//工具栏
+                show: false,
+                orient : 'vertical',//工具栏 icon 的布局朝向
+                x: 'right',
+                y: 'center',
+                feature : {//各工具配置项。
+                    mark : {show: true},
+                    dataView : {show: true, readOnly: false},//数据视图工具，可以展现当前图表所用的数据，编辑后可以动态更新。
+                    restore : {show: true},//配置项还原。
+                    saveAsImage : {show: true}//保存为图片。
+                }
+            },
+            roamController: {//控制地图的上下左右放大缩小 图上没有显示
+                show: true,
+                x: 'right',
+                mapTypeControl: {
+                    'china': true
+                }
+            },
+            series : [
+                {
+                    name: '案件量',
+                    type: 'map',
+                    mapType: '云南',
+                    roam: false,//是否开启鼠标缩放和平移漫游
+                    itemStyle:{//地图区域的多边形 图形样式
+                        normal:{//是图形在默认状态下的样式
+                            label:{
+                                show:false,//是否显示标签
+                                textStyle: {
+                                    color: "rgb(249, 249, 249)"
+                                }
+                            }
+                        },
+                        emphasis:{//是图形在高亮状态下的样式,比如在鼠标悬浮或者图例联动高亮时
+                            label:{show:true}
+                        }
+                    },
+                    top:"3%",//组件距离容器的距离
+                    data:[ 
+                        {name: '昆明市',value: Math.round(Math.random()*2000)},
+                        {name: '红河州',value: Math.round(Math.random()*2000)},
+                        {name: '大理州',value: Math.round(Math.random()*2000)},
+                        {name: '文山州',value: Math.round(Math.random()*2000)},
+                        {name: '德宏州',value: 0},
+                        {name: '曲靖市',value: Math.round(Math.random()*2000)},
+                        {name: '昭通市',value: 5},
+                        {name: '保山市',value: Math.round(Math.random()*2000)},
+
+                        {name: '玉溪市',value: Math.round(Math.random()*2000)},
+                        {name: '丽江地区',value: Math.round(Math.random()*2000)},
+                        {name: '临沧地区',value: Math.round(Math.random()*2000)},
+                        {name: '思茅地区',value: Math.round(Math.random()*2000)},
+                        {name: '西双版纳州',value: 0},
+                        {name: '怒江州',value: Math.round(Math.random()*2000)},
+                        {name: '迪庆州',value: 5},
+                       
+                        
+                        
+                        
+
+                    
+                        
+                    ]
+                }
+            ]
+        };
+
+
+            var option23 = {
+            title : {
+                // text: '订单量',
+                // subtext: '纯属虚构',
+                x:'center'
+            },
+            tooltip : { //提示框组件。
+                trigger: 'item' //数据项图形触发，主要在散点图，饼图等无类目轴的图表中使用。
+            },
+            legend: {
+                orient: 'horizontal', //图例的排列方向
+                x:'left', //图例的位置
+                data:['订单量']
+            },
+
+            visualMap: {//颜色的设置  dataRange
+                x: 'left',
+                y: 'center',
+                splitList: [
+                    {start: 1500},
+                    {start: 900, end: 1500},
+                    {start: 310, end: 1000},
+                    {start: 200, end: 300},
+                    {start: 10, end: 200, label: '10 到 200（自定义label）'},
+                    {start: 5, end: 5, label: '5（自定义特殊颜色）', color: '#077FBA'},
+                    {end: 10}
+                ],
+//            min: 0,
+//            max: 2500,
+//            calculable : true,//颜色呈条状
+                text:['高','低'],// 文本，默认为数值文本
+                // color: ['#E0022B', '#E09107', '#A3E00B']
+                color: ['#C1D3E3', '#077FBA', '#C9514C']
+            },
+            toolbox: {//工具栏
+                show: false,
+                orient : 'vertical',//工具栏 icon 的布局朝向
+                x: 'right',
+                y: 'center',
+                feature : {//各工具配置项。
+                    mark : {show: true},
+                    dataView : {show: true, readOnly: false},//数据视图工具，可以展现当前图表所用的数据，编辑后可以动态更新。
+                    restore : {show: true},//配置项还原。
+                    saveAsImage : {show: true}//保存为图片。
+                }
+            },
+            roamController: {//控制地图的上下左右放大缩小 图上没有显示
+                show: true,
+                x: 'right',
+                mapTypeControl: {
+                    'china': true
+                }
+            },
+            series : [
+                {
+                    name: '案件量',
+                    type: 'map',
+                    mapType: '西藏',
+                    roam: false,//是否开启鼠标缩放和平移漫游
+                    itemStyle:{//地图区域的多边形 图形样式
+                        normal:{//是图形在默认状态下的样式
+                            label:{
+                                show:false,//是否显示标签
+                                textStyle: {
+                                    color: "rgb(249, 249, 249)"
+                                }
+                            }
+                        },
+                        emphasis:{//是图形在高亮状态下的样式,比如在鼠标悬浮或者图例联动高亮时
+                            label:{show:true}
+                        }
+                    },
+                    top:"3%",//组件距离容器的距离
+                    data:[ 　
+                        {name: '拉萨市',value: Math.round(Math.random()*2000)},
+                        {name: '山南地区',value: Math.round(Math.random()*2000)},
+                        {name: '林芝地区',value: Math.round(Math.random()*2000)},
+                        {name: '日喀则地区',value: Math.round(Math.random()*2000)},
+                        {name: '阿里地区',value: 0},
+                        {name: '昌都地区',value: Math.round(Math.random()*2000)},
+                        {name: '那曲地区',value: 5},
+                        
+                       
+                                
+                    ]
+                }
+            ]
+        };
+
+
+         var option24 = {
+            title : {
+                // text: '订单量',
+                // subtext: '纯属虚构',
+                x:'center'
+            },
+            tooltip : { //提示框组件。
+                trigger: 'item' //数据项图形触发，主要在散点图，饼图等无类目轴的图表中使用。
+            },
+            legend: {
+                orient: 'horizontal', //图例的排列方向
+                x:'left', //图例的位置
+                data:['订单量']
+            },
+
+            visualMap: {//颜色的设置  dataRange
+                x: 'left',
+                y: 'center',
+                splitList: [
+                    {start: 1500},
+                    {start: 900, end: 1500},
+                    {start: 310, end: 1000},
+                    {start: 200, end: 300},
+                    {start: 10, end: 200, label: '10 到 200（自定义label）'},
+                    {start: 5, end: 5, label: '5（自定义特殊颜色）', color: '#077FBA'},
+                    {end: 10}
+                ],
+//            min: 0,
+//            max: 2500,
+//            calculable : true,//颜色呈条状
+                text:['高','低'],// 文本，默认为数值文本
+                // color: ['#E0022B', '#E09107', '#A3E00B']
+                color: ['#C1D3E3', '#077FBA', '#C9514C']
+            },
+            toolbox: {//工具栏
+                show: false,
+                orient : 'vertical',//工具栏 icon 的布局朝向
+                x: 'right',
+                y: 'center',
+                feature : {//各工具配置项。
+                    mark : {show: true},
+                    dataView : {show: true, readOnly: false},//数据视图工具，可以展现当前图表所用的数据，编辑后可以动态更新。
+                    restore : {show: true},//配置项还原。
+                    saveAsImage : {show: true}//保存为图片。
+                }
+            },
+            roamController: {//控制地图的上下左右放大缩小 图上没有显示
+                show: true,
+                x: 'right',
+                mapTypeControl: {
+                    'china': true
+                }
+            },
+            series : [
+                {
+                    name: '案件量',
+                    type: 'map',
+                    mapType: '陕西',
+                    roam: false,//是否开启鼠标缩放和平移漫游
+                    itemStyle:{//地图区域的多边形 图形样式
+                        normal:{//是图形在默认状态下的样式
+                            label:{
+                                show:false,//是否显示标签
+                                textStyle: {
+                                    color: "rgb(249, 249, 249)"
+                                }
+                            }
+                        },
+                        emphasis:{//是图形在高亮状态下的样式,比如在鼠标悬浮或者图例联动高亮时
+                            label:{show:true}
+                        }
+                    },
+                    top:"3%",//组件距离容器的距离
+                    data:[ 　
+                        {name: '西安市',value: Math.round(Math.random()*2000)},
+                        {name: '咸阳市',value: Math.round(Math.random()*2000)},
+                        {name: '宝鸡市',value: Math.round(Math.random()*2000)},
+                        {name: '汉中市',value: Math.round(Math.random()*2000)},
+                        {name: '渭南市',value: 0},
+                        {name: '安康市',value: Math.round(Math.random()*2000)},
+                        {name: '榆林市',value: 5},
+                        {name: '商洛市',value: Math.round(Math.random()*2000)},
+                        {name: '延安市',value: 0},
+                        {name: '铜川市',value: Math.round(Math.random()*2000)},
+                       
+                        
+                       
+                                
+                    ]
+                }
+            ]
+        };
+
+        var option25 = {
+            title : {
+                // text: '订单量',
+                // subtext: '纯属虚构',
+                x:'center'
+            },
+            tooltip : { //提示框组件。
+                trigger: 'item' //数据项图形触发，主要在散点图，饼图等无类目轴的图表中使用。
+            },
+            legend: {
+                orient: 'horizontal', //图例的排列方向
+                x:'left', //图例的位置
+                data:['订单量']
+            },
+
+            visualMap: {//颜色的设置  dataRange
+                x: 'left',
+                y: 'center',
+                splitList: [
+                    {start: 1500},
+                    {start: 900, end: 1500},
+                    {start: 310, end: 1000},
+                    {start: 200, end: 300},
+                    {start: 10, end: 200, label: '10 到 200（自定义label）'},
+                    {start: 5, end: 5, label: '5（自定义特殊颜色）', color: '#077FBA'},
+                    {end: 10}
+                ],
+//            min: 0,
+//            max: 2500,
+//            calculable : true,//颜色呈条状
+                text:['高','低'],// 文本，默认为数值文本
+                // color: ['#E0022B', '#E09107', '#A3E00B']
+                color: ['#C1D3E3', '#077FBA', '#C9514C']
+            },
+            toolbox: {//工具栏
+                show: false,
+                orient : 'vertical',//工具栏 icon 的布局朝向
+                x: 'right',
+                y: 'center',
+                feature : {//各工具配置项。
+                    mark : {show: true},
+                    dataView : {show: true, readOnly: false},//数据视图工具，可以展现当前图表所用的数据，编辑后可以动态更新。
+                    restore : {show: true},//配置项还原。
+                    saveAsImage : {show: true}//保存为图片。
+                }
+            },
+            roamController: {//控制地图的上下左右放大缩小 图上没有显示
+                show: true,
+                x: 'right',
+                mapTypeControl: {
+                    'china': true
+                }
+            },
+            series : [
+                {
+                    name: '案件量',
+                    type: 'map',
+                    mapType: '甘肃',
+                    roam: false,//是否开启鼠标缩放和平移漫游
+                    itemStyle:{//地图区域的多边形 图形样式
+                        normal:{//是图形在默认状态下的样式
+                            label:{
+                                show:false,//是否显示标签
+                                textStyle: {
+                                    color: "rgb(249, 249, 249)"
+                                }
+                            }
+                        },
+                        emphasis:{//是图形在高亮状态下的样式,比如在鼠标悬浮或者图例联动高亮时
+                            label:{show:true}
+                        }
+                    },
+                    top:"3%",//组件距离容器的距离
+                    data:[ 　
+                        {name: '兰州市',value: Math.round(Math.random()*2000)},
+                        {name: '天水市',value: Math.round(Math.random()*2000)},
+                        {name: '庆阳市',value: Math.round(Math.random()*2000)},
+                        {name: '武威市',value: Math.round(Math.random()*2000)},
+                        {name: '酒泉市',value: 0},
+                        {name: '张掖市',value: Math.round(Math.random()*2000)},
+                        {name: '陇南地区',value: 5},
+                        {name: '白银市',value: Math.round(Math.random()*2000)},
+                        {name: '定西地区',value: 0},
+                        {name: '平凉市',value: Math.round(Math.random()*2000)},
+                        {name: '嘉峪关市',value: 5},
+                        {name: '临夏回族自治州　',value: Math.round(Math.random()*2000)},
+                        {name: '金昌市',value: 0},
+                        {name: '甘南州',value: Math.round(Math.random()*2000)},
+                       
+                        
+                       
+                                
+                    ]
+                }
+            ]
+        };
+
+
+                var option26 = {
+            title : {
+                // text: '订单量',
+                // subtext: '纯属虚构',
+                x:'center'
+            },
+            tooltip : { //提示框组件。
+                trigger: 'item' //数据项图形触发，主要在散点图，饼图等无类目轴的图表中使用。
+            },
+            legend: {
+                orient: 'horizontal', //图例的排列方向
+                x:'left', //图例的位置
+                data:['订单量']
+            },
+
+            visualMap: {//颜色的设置  dataRange
+                x: 'left',
+                y: 'center',
+                splitList: [
+                    {start: 1500},
+                    {start: 900, end: 1500},
+                    {start: 310, end: 1000},
+                    {start: 200, end: 300},
+                    {start: 10, end: 200, label: '10 到 200（自定义label）'},
+                    {start: 5, end: 5, label: '5（自定义特殊颜色）', color: '#077FBA'},
+                    {end: 10}
+                ],
+//            min: 0,
+//            max: 2500,
+//            calculable : true,//颜色呈条状
+                text:['高','低'],// 文本，默认为数值文本
+                // color: ['#E0022B', '#E09107', '#A3E00B']
+                color: ['#C1D3E3', '#077FBA', '#C9514C']
+            },
+            toolbox: {//工具栏
+                show: false,
+                orient : 'vertical',//工具栏 icon 的布局朝向
+                x: 'right',
+                y: 'center',
+                feature : {//各工具配置项。
+                    mark : {show: true},
+                    dataView : {show: true, readOnly: false},//数据视图工具，可以展现当前图表所用的数据，编辑后可以动态更新。
+                    restore : {show: true},//配置项还原。
+                    saveAsImage : {show: true}//保存为图片。
+                }
+            },
+            roamController: {//控制地图的上下左右放大缩小 图上没有显示
+                show: true,
+                x: 'right',
+                mapTypeControl: {
+                    'china': true
+                }
+            },
+            series : [
+                {
+                    name: '案件量',
+                    type: 'map',
+                    mapType: '青海',
+                    roam: false,//是否开启鼠标缩放和平移漫游
+                    itemStyle:{//地图区域的多边形 图形样式
+                        normal:{//是图形在默认状态下的样式
+                            label:{
+                                show:false,//是否显示标签
+                                textStyle: {
+                                    color: "rgb(249, 249, 249)"
+                                }
+                            }
+                        },
+                        emphasis:{//是图形在高亮状态下的样式,比如在鼠标悬浮或者图例联动高亮时
+                            label:{show:true}
+                        }
+                    },
+                    top:"3%",//组件距离容器的距离
+                    data:[ 　　
+                        {name: '西宁市',value: Math.round(Math.random()*2000)},
+                        {name: '海西州',value: Math.round(Math.random()*2000)},
+                        {name: '海东地区',value: Math.round(Math.random()*2000)},
+                        {name: '海北州',value: Math.round(Math.random()*2000)},
+                        {name: '果洛州',value: 0},
+                        {name: '玉树州',value: Math.round(Math.random()*2000)},
+                        {name: '黄南藏族自治州',value: 5},
+                       
+                       
+                        
+                       
+                                
+                    ]
+                }
+            ]
+        };
+
+                        var option27 = {
+            title : {
+                // text: '订单量',
+                // subtext: '纯属虚构',
+                x:'center'
+            },
+            tooltip : { //提示框组件。
+                trigger: 'item' //数据项图形触发，主要在散点图，饼图等无类目轴的图表中使用。
+            },
+            legend: {
+                orient: 'horizontal', //图例的排列方向
+                x:'left', //图例的位置
+                data:['订单量']
+            },
+
+            visualMap: {//颜色的设置  dataRange
+                x: 'left',
+                y: 'center',
+                splitList: [
+                    {start: 1500},
+                    {start: 900, end: 1500},
+                    {start: 310, end: 1000},
+                    {start: 200, end: 300},
+                    {start: 10, end: 200, label: '10 到 200（自定义label）'},
+                    {start: 5, end: 5, label: '5（自定义特殊颜色）', color: '#077FBA'},
+                    {end: 10}
+                ],
+//            min: 0,
+//            max: 2500,
+//            calculable : true,//颜色呈条状
+                text:['高','低'],// 文本，默认为数值文本
+                // color: ['#E0022B', '#E09107', '#A3E00B']
+                color: ['#C1D3E3', '#077FBA', '#C9514C']
+            },
+            toolbox: {//工具栏
+                show: false,
+                orient : 'vertical',//工具栏 icon 的布局朝向
+                x: 'right',
+                y: 'center',
+                feature : {//各工具配置项。
+                    mark : {show: true},
+                    dataView : {show: true, readOnly: false},//数据视图工具，可以展现当前图表所用的数据，编辑后可以动态更新。
+                    restore : {show: true},//配置项还原。
+                    saveAsImage : {show: true}//保存为图片。
+                }
+            },
+            roamController: {//控制地图的上下左右放大缩小 图上没有显示
+                show: true,
+                x: 'right',
+                mapTypeControl: {
+                    'china': true
+                }
+            },
+            series : [
+                {
+                    name: '案件量',
+                    type: 'map',
+                    mapType: '宁夏',
+                    roam: false,//是否开启鼠标缩放和平移漫游
+                    itemStyle:{//地图区域的多边形 图形样式
+                        normal:{//是图形在默认状态下的样式
+                            label:{
+                                show:false,//是否显示标签
+                                textStyle: {
+                                    color: "rgb(249, 249, 249)"
+                                }
+                            }
+                        },
+                        emphasis:{//是图形在高亮状态下的样式,比如在鼠标悬浮或者图例联动高亮时
+                            label:{show:true}
+                        }
+                    },
+                    top:"3%",//组件距离容器的距离
+                    data:[ 　　
+                        {name: '银川市',value: Math.round(Math.random()*2000)},
+                        {name: '吴忠市',value: Math.round(Math.random()*2000)},
+                        {name: '中卫市',value: Math.round(Math.random()*2000)},
+                        {name: '石嘴山市',value: Math.round(Math.random()*2000)},
+                        {name: '固原市',value: 0},
+                        
+                       
+                       
+                        
+                       
+                                
+                    ]
+                }
+            ]
+        };
+
+
+            var option28 = {
+            title : {
+                // text: '订单量',
+                // subtext: '纯属虚构',
+                x:'center'
+            },
+            tooltip : { //提示框组件。
+                trigger: 'item' //数据项图形触发，主要在散点图，饼图等无类目轴的图表中使用。
+            },
+            legend: {
+                orient: 'horizontal', //图例的排列方向
+                x:'left', //图例的位置
+                data:['订单量']
+            },
+
+            visualMap: {//颜色的设置  dataRange
+                x: 'left',
+                y: 'center',
+                splitList: [
+                    {start: 1500},
+                    {start: 900, end: 1500},
+                    {start: 310, end: 1000},
+                    {start: 200, end: 300},
+                    {start: 10, end: 200, label: '10 到 200（自定义label）'},
+                    {start: 5, end: 5, label: '5（自定义特殊颜色）', color: '#077FBA'},
+                    {end: 10}
+                ],
+//            min: 0,
+//            max: 2500,
+//            calculable : true,//颜色呈条状
+                text:['高','低'],// 文本，默认为数值文本
+                // color: ['#E0022B', '#E09107', '#A3E00B']
+                color: ['#C1D3E3', '#077FBA', '#C9514C']
+            },
+            toolbox: {//工具栏
+                show: false,
+                orient : 'vertical',//工具栏 icon 的布局朝向
+                x: 'right',
+                y: 'center',
+                feature : {//各工具配置项。
+                    mark : {show: true},
+                    dataView : {show: true, readOnly: false},//数据视图工具，可以展现当前图表所用的数据，编辑后可以动态更新。
+                    restore : {show: true},//配置项还原。
+                    saveAsImage : {show: true}//保存为图片。
+                }
+            },
+            roamController: {//控制地图的上下左右放大缩小 图上没有显示
+                show: true,
+                x: 'right',
+                mapTypeControl: {
+                    'china': true
+                }
+            },
+            series : [
+                {
+                    name: '案件量',
+                    type: 'map',
+                    mapType: '新疆',
+                    roam: false,//是否开启鼠标缩放和平移漫游
+                    itemStyle:{//地图区域的多边形 图形样式
+                        normal:{//是图形在默认状态下的样式
+                            label:{
+                                show:false,//是否显示标签
+                                textStyle: {
+                                    color: "rgb(249, 249, 249)"
+                                }
+                            }
+                        },
+                        emphasis:{//是图形在高亮状态下的样式,比如在鼠标悬浮或者图例联动高亮时
+                            label:{show:true}
+                        }
+                    },
+                    top:"3%",//组件距离容器的距离
+                    data:[　
+                        {name: '乌鲁木齐市',value: Math.round(Math.random()*2000)},
+                        {name: '伊犁州',value: Math.round(Math.random()*2000)},
+                        {name: '昌吉州',value: Math.round(Math.random()*2000)},
+                        {name: '石河子市',value: Math.round(Math.random()*2000)},
+                        {name: '哈密地区',value: 0},
+
+                        {name: '阿克苏地区',value: Math.round(Math.random()*2000)},
+                        {name: '巴音郭楞州',value: Math.round(Math.random()*2000)},
+                        {name: '喀什地区',value: Math.round(Math.random()*2000)},
+                        {name: '塔城地区',value: Math.round(Math.random()*2000)},
+                        {name: '克拉玛依市',value: 0},
+
+                        {name: '和田地区',value: Math.round(Math.random()*2000)},
+                        {name: '阿勒泰州',value: Math.round(Math.random()*2000)},
+                        {name: '吐鲁番地区',value: Math.round(Math.random()*2000)},
+                        {name: '阿拉尔市',value: Math.round(Math.random()*2000)},
+                        {name: '博尔塔拉州',value: 0},
+
+                        {name: '五家渠市',value: Math.round(Math.random()*2000)},
+                        {name: '克孜勒苏州',value: Math.round(Math.random()*2000)},
+                        {name: '图木舒克市',value: 0},
+                        
+                       
+                       
+                        
+                       
+                                
+                    ]
+                }
+            ]
+        };
+
+
+                    var option29 = {
+            title : {
+                // text: '订单量',
+                // subtext: '纯属虚构',
+                x:'center'
+            },
+            tooltip : { //提示框组件。
+                trigger: 'item' //数据项图形触发，主要在散点图，饼图等无类目轴的图表中使用。
+            },
+            legend: {
+                orient: 'horizontal', //图例的排列方向
+                x:'left', //图例的位置
+                data:['订单量']
+            },
+
+            visualMap: {//颜色的设置  dataRange
+                x: 'left',
+                y: 'center',
+                splitList: [
+                    {start: 1500},
+                    {start: 900, end: 1500},
+                    {start: 310, end: 1000},
+                    {start: 200, end: 300},
+                    {start: 10, end: 200, label: '10 到 200（自定义label）'},
+                    {start: 5, end: 5, label: '5（自定义特殊颜色）', color: '#077FBA'},
+                    {end: 10}
+                ],
+//            min: 0,
+//            max: 2500,
+//            calculable : true,//颜色呈条状
+                text:['高','低'],// 文本，默认为数值文本
+                // color: ['#E0022B', '#E09107', '#A3E00B']
+                color: ['#C1D3E3', '#077FBA', '#C9514C']
+            },
+            toolbox: {//工具栏
+                show: false,
+                orient : 'vertical',//工具栏 icon 的布局朝向
+                x: 'right',
+                y: 'center',
+                feature : {//各工具配置项。
+                    mark : {show: true},
+                    dataView : {show: true, readOnly: false},//数据视图工具，可以展现当前图表所用的数据，编辑后可以动态更新。
+                    restore : {show: true},//配置项还原。
+                    saveAsImage : {show: true}//保存为图片。
+                }
+            },
+            roamController: {//控制地图的上下左右放大缩小 图上没有显示
+                show: true,
+                x: 'right',
+                mapTypeControl: {
+                    'china': true
+                }
+            },
+            series : [
+                {
+                    name: '案件量',
+                    type: 'map',
+                    mapType: '北京',
+                    roam: false,//是否开启鼠标缩放和平移漫游
+                    itemStyle:{//地图区域的多边形 图形样式
+                        normal:{//是图形在默认状态下的样式
+                            label:{
+                                show:false,//是否显示标签
+                                textStyle: {
+                                    color: "rgb(249, 249, 249)"
+                                }
+                            }
+                        },
+                        emphasis:{//是图形在高亮状态下的样式,比如在鼠标悬浮或者图例联动高亮时
+                            label:{show:true}
+                        }
+                    },
+                    top:"3%",//组件距离容器的距离
+                    data:[
+                        {name: '朝阳区',value: Math.round(Math.random()*2000)},
+                        {name: '海淀区',value: Math.round(Math.random()*2000)},
+                        {name: '通州区',value: Math.round(Math.random()*2000)},
+                        {name: '房山区',value: Math.round(Math.random()*2000)},
+                        {name: '丰台区',value: 0},
+
+                        {name: '昌平区',value: Math.round(Math.random()*2000)},
+                        {name: '大兴区',value: Math.round(Math.random()*2000)},
+                        {name: '顺义区',value: Math.round(Math.random()*2000)},
+                        {name: '西城区',value: Math.round(Math.random()*2000)},
+                        {name: '延庆县',value: 0},
+
+                        {name: '石景山区',value: Math.round(Math.random()*2000)},
+                        {name: '宣武区',value: Math.round(Math.random()*2000)},
+                        {name: '怀柔区',value: Math.round(Math.random()*2000)},
+                        {name: '崇文区',value: Math.round(Math.random()*2000)},
+                        {name: '密云县',value: 0},
+
+                        {name: '东城区',value: Math.round(Math.random()*2000)},
+                        {name: '门头沟区',value: Math.round(Math.random()*2000)},
+                        {name: '平谷区',value: 0},
+                        
+                       
+                       
+                        
+                       
+                                
+                    ]
+                }
+            ]
+        };
+
+
+            var option30 = {
+            title : {
+                // text: '订单量',
+                // subtext: '纯属虚构',
+                x:'center'
+            },
+            tooltip : { //提示框组件。
+                trigger: 'item' //数据项图形触发，主要在散点图，饼图等无类目轴的图表中使用。
+            },
+            legend: {
+                orient: 'horizontal', //图例的排列方向
+                x:'left', //图例的位置
+                data:['订单量']
+            },
+
+            visualMap: {//颜色的设置  dataRange
+                x: 'left',
+                y: 'center',
+                splitList: [
+                    {start: 1500},
+                    {start: 900, end: 1500},
+                    {start: 310, end: 1000},
+                    {start: 200, end: 300},
+                    {start: 10, end: 200, label: '10 到 200（自定义label）'},
+                    {start: 5, end: 5, label: '5（自定义特殊颜色）', color: '#077FBA'},
+                    {end: 10}
+                ],
+//            min: 0,
+//            max: 2500,
+//            calculable : true,//颜色呈条状
+                text:['高','低'],// 文本，默认为数值文本
+                // color: ['#E0022B', '#E09107', '#A3E00B']
+                color: ['#C1D3E3', '#077FBA', '#C9514C']
+            },
+            toolbox: {//工具栏
+                show: false,
+                orient : 'vertical',//工具栏 icon 的布局朝向
+                x: 'right',
+                y: 'center',
+                feature : {//各工具配置项。
+                    mark : {show: true},
+                    dataView : {show: true, readOnly: false},//数据视图工具，可以展现当前图表所用的数据，编辑后可以动态更新。
+                    restore : {show: true},//配置项还原。
+                    saveAsImage : {show: true}//保存为图片。
+                }
+            },
+            roamController: {//控制地图的上下左右放大缩小 图上没有显示
+                show: true,
+                x: 'right',
+                mapTypeControl: {
+                    'china': true
+                }
+            },
+            series : [
+                {
+                    name: '案件量',
+                    type: 'map',
+                    mapType: '天津',
+                    roam: false,//是否开启鼠标缩放和平移漫游
+                    itemStyle:{//地图区域的多边形 图形样式
+                        normal:{//是图形在默认状态下的样式
+                            label:{
+                                show:false,//是否显示标签
+                                textStyle: {
+                                    color: "rgb(249, 249, 249)"
+                                }
+                            }
+                        },
+                        emphasis:{//是图形在高亮状态下的样式,比如在鼠标悬浮或者图例联动高亮时
+                            label:{show:true}
+                        }
+                    },
+                    top:"3%",//组件距离容器的距离
+                    data:[
+                        {name: '和平区',value: Math.round(Math.random()*2000)},
+                        {name: '北辰区',value: Math.round(Math.random()*2000)},
+                        {name: '河北区',value: Math.round(Math.random()*2000)},
+                        {name: '河西区',value: Math.round(Math.random()*2000)},
+                        {name: '西青区',value: 0},
+
+                        {name: '津南区',value: Math.round(Math.random()*2000)},
+                        {name: '东丽区',value: Math.round(Math.random()*2000)},
+                        {name: '武清区',value: Math.round(Math.random()*2000)},
+                        {name: '宝坻区',value: Math.round(Math.random()*2000)},
+                        {name: '红桥区',value: 0},
+
+                        {name: '大港区',value: Math.round(Math.random()*2000)},
+                        {name: '汉沽区',value: Math.round(Math.random()*2000)},
+                        {name: '静海县',value: Math.round(Math.random()*2000)},
+                        {name: '宁河县',value: Math.round(Math.random()*2000)},
+                        {name: '塘沽区',value: 0},
+
+                        {name: '蓟县',value: Math.round(Math.random()*2000)},
+                        {name: '南开区',value: Math.round(Math.random()*2000)},
+                        {name: '河东区',value: 0},
+                        
+                       
+                       
+                        
+                       
+                                
+                    ]
+                }
+            ]
+        };
+
+
+        var option31 = {
+            title : {
+                // text: '订单量',
+                // subtext: '纯属虚构',
+                x:'center'
+            },
+            tooltip : { //提示框组件。
+                trigger: 'item' //数据项图形触发，主要在散点图，饼图等无类目轴的图表中使用。
+            },
+            legend: {
+                orient: 'horizontal', //图例的排列方向
+                x:'left', //图例的位置
+                data:['订单量']
+            },
+
+            visualMap: {//颜色的设置  dataRange
+                x: 'left',
+                y: 'center',
+                splitList: [
+                    {start: 1500},
+                    {start: 900, end: 1500},
+                    {start: 310, end: 1000},
+                    {start: 200, end: 300},
+                    {start: 10, end: 200, label: '10 到 200（自定义label）'},
+                    {start: 5, end: 5, label: '5（自定义特殊颜色）', color: '#077FBA'},
+                    {end: 10}
+                ],
+//            min: 0,
+//            max: 2500,
+//            calculable : true,//颜色呈条状
+                text:['高','低'],// 文本，默认为数值文本
+                // color: ['#E0022B', '#E09107', '#A3E00B']
+                color: ['#C1D3E3', '#077FBA', '#C9514C']
+            },
+            toolbox: {//工具栏
+                show: false,
+                orient : 'vertical',//工具栏 icon 的布局朝向
+                x: 'right',
+                y: 'center',
+                feature : {//各工具配置项。
+                    mark : {show: true},
+                    dataView : {show: true, readOnly: false},//数据视图工具，可以展现当前图表所用的数据，编辑后可以动态更新。
+                    restore : {show: true},//配置项还原。
+                    saveAsImage : {show: true}//保存为图片。
+                }
+            },
+            roamController: {//控制地图的上下左右放大缩小 图上没有显示
+                show: true,
+                x: 'right',
+                mapTypeControl: {
+                    'china': true
+                }
+            },
+            series : [
+                {
+                    name: '案件量',
+                    type: 'map',
+                    mapType: '重庆',
+                    roam: false,//是否开启鼠标缩放和平移漫游
+                    itemStyle:{//地图区域的多边形 图形样式
+                        normal:{//是图形在默认状态下的样式
+                            label:{
+                                show:false,//是否显示标签
+                                textStyle: {
+                                    color: "rgb(249, 249, 249)"
+                                }
+                            }
+                        },
+                        emphasis:{//是图形在高亮状态下的样式,比如在鼠标悬浮或者图例联动高亮时
+                            label:{show:true}
+                        }
+                    },
+                    top:"3%",//组件距离容器的距离
+                    data:[
+                        {name: '江北区',value: Math.round(Math.random()*2000)},
+                        {name: '渝北区',value: Math.round(Math.random()*2000)},
+                        {name: '沙坪坝区',value: Math.round(Math.random()*2000)},
+                        {name: '九龙坡区',value: Math.round(Math.random()*2000)},
+                        {name: '万州区',value: 0},
+
+                        {name: '永川市',value: Math.round(Math.random()*2000)},
+                        {name: '南岸区',value: Math.round(Math.random()*2000)},
+                        {name: '酉阳县',value: Math.round(Math.random()*2000)},
+                        {name: '北碚区',value: Math.round(Math.random()*2000)},
+                        {name: '涪陵区',value: 0},
+
+                        {name: '秀山县',value: Math.round(Math.random()*2000)},
+                        {name: '巴南区',value: Math.round(Math.random()*2000)},
+                        {name: '渝中区',value: Math.round(Math.random()*2000)},
+                        {name: '石柱县',value: Math.round(Math.random()*2000)},
+                        {name: '忠县',value: 0},
+
+                        {name: '合川市',value: Math.round(Math.random()*2000)},
+                        {name: '大渡口区',value: Math.round(Math.random()*2000)},
+                        {name: '开县',value: 0},
+
+
+
+                        {name: '长寿区',value: Math.round(Math.random()*2000)},
+                        {name: '荣昌县',value: Math.round(Math.random()*2000)},
+                        {name: '云阳县',value: Math.round(Math.random()*2000)},
+                        {name: '梁平县',value: Math.round(Math.random()*2000)},
+                        {name: '潼南县',value: 0},
+
+                        {name: '江津市',value: Math.round(Math.random()*2000)},
+                        {name: '彭水县',value: Math.round(Math.random()*2000)},
+                        {name: '璧山县',value: 0},
+
+                        {name: '綦江县',value: Math.round(Math.random()*2000)},
+                        {name: '大足县',value: Math.round(Math.random()*2000)},
+                        {name: '黔江区',value: Math.round(Math.random()*2000)},
+                        {name: '巫溪县',value: Math.round(Math.random()*2000)},
+                        {name: '巫山县',value: 0},
+
+                        {name: '垫江县',value: Math.round(Math.random()*2000)},
+                        {name: '丰都县',value: Math.round(Math.random()*2000)},
+                        {name: '武隆县',value: 0},
+
+                        {name: '万盛区',value: Math.round(Math.random()*2000)},
+                        {name: '铜梁县',value: Math.round(Math.random()*2000)},
+                        {name: '南川市',value: Math.round(Math.random()*2000)},
+                        {name: '奉节县',value: Math.round(Math.random()*2000)},
+                        {name: '双桥区',value: 0},
+
+                        {name: '城口县',value: Math.round(Math.random()*2000)},
+                        
+
+                        
+                       
+                       
+                        
+                       
+                                
+                    ]
+                }
+            ]
+        };
+
+
+          var option32 = {
+            title : {
+                // text: '订单量',
+                // subtext: '纯属虚构',
+                x:'center'
+            },
+            tooltip : { //提示框组件。
+                trigger: 'item' //数据项图形触发，主要在散点图，饼图等无类目轴的图表中使用。
+            },
+            legend: {
+                orient: 'horizontal', //图例的排列方向
+                x:'left', //图例的位置
+                data:['订单量']
+            },
+
+            visualMap: {//颜色的设置  dataRange
+                x: 'left',
+                y: 'center',
+                splitList: [
+                    {start: 1500},
+                    {start: 900, end: 1500},
+                    {start: 310, end: 1000},
+                    {start: 200, end: 300},
+                    {start: 10, end: 200, label: '10 到 200（自定义label）'},
+                    {start: 5, end: 5, label: '5（自定义特殊颜色）', color: '#077FBA'},
+                    {end: 10}
+                ],
+//            min: 0,
+//            max: 2500,
+//            calculable : true,//颜色呈条状
+                text:['高','低'],// 文本，默认为数值文本
+                // color: ['#E0022B', '#E09107', '#A3E00B']
+                color: ['#C1D3E3', '#077FBA', '#C9514C']
+            },
+            toolbox: {//工具栏
+                show: false,
+                orient : 'vertical',//工具栏 icon 的布局朝向
+                x: 'right',
+                y: 'center',
+                feature : {//各工具配置项。
+                    mark : {show: true},
+                    dataView : {show: true, readOnly: false},//数据视图工具，可以展现当前图表所用的数据，编辑后可以动态更新。
+                    restore : {show: true},//配置项还原。
+                    saveAsImage : {show: true}//保存为图片。
+                }
+            },
+            roamController: {//控制地图的上下左右放大缩小 图上没有显示
+                show: true,
+                x: 'right',
+                mapTypeControl: {
+                    'china': true
+                }
+            },
+            series : [
+                {
+                    name: '案件量',
+                    type: 'map',
+                    mapType: '香港',
+                    roam: false,//是否开启鼠标缩放和平移漫游
+                    itemStyle:{//地图区域的多边形 图形样式
+                        normal:{//是图形在默认状态下的样式
+                            label:{
+                                show:false,//是否显示标签
+                                textStyle: {
+                                    color: "rgb(249, 249, 249)"
+                                }
+                            }
+                        },
+                        emphasis:{//是图形在高亮状态下的样式,比如在鼠标悬浮或者图例联动高亮时
+                            label:{show:true}
+                        }
+                    },
+                    top:"3%",//组件距离容器的距离
+                    data:[
+                        
+
+                        
+                       
+                       
+                        
+                       
+                                
+                    ]
+                }
+            ]
+        };
+
+
+         var option33 = {
+            title : {
+                // text: '订单量',
+                // subtext: '纯属虚构',
+                x:'center'
+            },
+            tooltip : { //提示框组件。
+                trigger: 'item' //数据项图形触发，主要在散点图，饼图等无类目轴的图表中使用。
+            },
+            legend: {
+                orient: 'horizontal', //图例的排列方向
+                x:'left', //图例的位置
+                data:['订单量']
+            },
+
+            visualMap: {//颜色的设置  dataRange
+                x: 'left',
+                y: 'center',
+                splitList: [
+                    {start: 1500},
+                    {start: 900, end: 1500},
+                    {start: 310, end: 1000},
+                    {start: 200, end: 300},
+                    {start: 10, end: 200, label: '10 到 200（自定义label）'},
+                    {start: 5, end: 5, label: '5（自定义特殊颜色）', color: '#077FBA'},
+                    {end: 10}
+                ],
+//            min: 0,
+//            max: 2500,
+//            calculable : true,//颜色呈条状
+                text:['高','低'],// 文本，默认为数值文本
+                // color: ['#E0022B', '#E09107', '#A3E00B']
+                color: ['#C1D3E3', '#077FBA', '#C9514C']
+            },
+            toolbox: {//工具栏
+                show: false,
+                orient : 'vertical',//工具栏 icon 的布局朝向
+                x: 'right',
+                y: 'center',
+                feature : {//各工具配置项。
+                    mark : {show: true},
+                    dataView : {show: true, readOnly: false},//数据视图工具，可以展现当前图表所用的数据，编辑后可以动态更新。
+                    restore : {show: true},//配置项还原。
+                    saveAsImage : {show: true}//保存为图片。
+                }
+            },
+            roamController: {//控制地图的上下左右放大缩小 图上没有显示
+                show: true,
+                x: 'right',
+                mapTypeControl: {
+                    'china': true
+                }
+            },
+            series : [
+                {
+                    name: '案件量',
+                    type: 'map',
+                    mapType: '香港',
+                    roam: false,//是否开启鼠标缩放和平移漫游
+                    itemStyle:{//地图区域的多边形 图形样式
+                        normal:{//是图形在默认状态下的样式
+                            label:{
+                                show:false,//是否显示标签
+                                textStyle: {
+                                    color: "rgb(249, 249, 249)"
+                                }
+                            }
+                        },
+                        emphasis:{//是图形在高亮状态下的样式,比如在鼠标悬浮或者图例联动高亮时
+                            label:{show:true}
+                        }
+                    },
+                    top:"3%",//组件距离容器的距离
+                    data:[
+                        
+
+                        
+                       
+                       
+                        
+                       
+                                
+                    ]
+                }
+            ]
+        };
+
+
+
+
+
+
+
+
+        if(pName == '四川'){
+            myChart1.setOption(option1);
+
+           
+
+        }
+        else if(pName == '上海'){
+            myChart1.setOption(option2);
+
+
+        }
+        else if(pName == '河北'){
+            myChart1.setOption(option3);
+        }
+        else if(pName == '山西'){
+            myChart1.setOption(option4);
+        }
+        else if(pName == '内蒙古'){
+            myChart1.setOption(option5);
+        }
+        else if(pName == '辽宁'){
+            myChart1.setOption(option6);
+        }
+        else if(pName == '吉林'){
+            myChart1.setOption(option7);
+        }
+        else if(pName == '黑龙江'){
+            myChart1.setOption(option8);
+        }
+        else if(pName == '江苏'){
+            myChart1.setOption(option9);
+        }
+        else if(pName == '浙江'){
+            myChart1.setOption(option10);
+        }
+        else if(pName == '安徽'){
+            myChart1.setOption(option11);
+        }
+        else if(pName == '福建'){
+            myChart1.setOption(option12);
+        }
+        else if(pName == '江西'){
+            myChart1.setOption(option13);
+        }
+        else if(pName == '山东'){
+            myChart1.setOption(option14);
+        }
+        else if(pName == '河南'){
+            myChart1.setOption(option15);
+        }
+        else if(pName == '湖北'){
+            myChart1.setOption(option16);
+        }
+        else if(pName == '湖南'){
+            myChart1.setOption(option17);
+        }
+        else if(pName == '广东'){
+            myChart1.setOption(option18);
+        }
+        else if(pName == '广西'){
+            myChart1.setOption(option19);
+        }
+        else if(pName == '海南'){
+            myChart1.setOption(option20);
+        }
+        else if(pName == '贵州'){
+            myChart1.setOption(option21);
+        }
+        else if(pName == '云南'){
+            myChart1.setOption(option22);
+        }
+        else if(pName == '西藏'){
+            myChart1.setOption(option23);
+        }
+        else if(pName == '陕西'){
+            myChart1.setOption(option24);
+        }
+        else if(pName == '甘肃'){
+            myChart1.setOption(option25);
+        }
+        else if(pName == '青海'){
+            myChart1.setOption(option26);
+        }
+        else if(pName == '宁夏'){
+            myChart1.setOption(option27);
+        }
+        else if(pName == '新疆'){
+            myChart1.setOption(option28);
+        }
+        else if(pName == '北京'){
+            myChart1.setOption(option29);
+        }
+        else if(pName == '天津'){
+            myChart1.setOption(option30);
+        }
+         else if(pName == '重庆'){
+            myChart1.setOption(option31);
+        }
+        else if(pName == '香港'){
+            myChart1.setOption(option32);
+        }
+        else if(pName == '台湾'){
+            myChart1.setOption(option33);
+        }
+
+
+
+
+
+
+
+
+
+        else{
+            myChart1.setOption(option);
+
+        }
+
+
+        myChart1.on('click', function (param) {
+            initChina();
+
+        });
+       
+
+    }
+
+
+    //定义全国省份的数组
+    var provinces = ['shanghai', 'hebei','shanxi','neimenggu','liaoning','jilin','heilongjiang','jiangsu','zhejiang','anhui','fujian','jiangxi','shandong','henan','hubei','hunan','guangdong','guangxi','hainan','sichuan','guizhou','yunnan','xizang','shanxi1','gansu','qinghai','ningxia','xinjiang', 'beijing', 'tianjin', 'chongqing', 'xianggang', 'aomen', 'taiwan'];
+
+    var provincesText = ['上海', '河北', '山西', '内蒙古', '辽宁', '吉林','黑龙江',  '江苏', '浙江', '安徽', '福建', '江西', '山东','河南', '湖北', '湖南', '广东', '广西', '海南', '四川', '贵州', '云南', '西藏', '陕西', '甘肃', '青海', '宁夏', '新疆', '北京', '天津', '重庆', '香港', '澳门', '台湾'];
+
+    myChart.on('click', function (param) {
+        // alert(param.name);
+        //遍历取到provincesText 中的下标  去拿到对应的省js
+        for(var  i= 0 ; i < provincesText.length ; i++ ){
+            if(param.name == provincesText[i]){
+                //显示对应省份的方法
+
+                // showProvince(provinces[i]) ;
+                showProvince(provinces[i],provincesText[i])
+
+                break ;
+            }
+        }
+    });
+
+
+    //展示对应的省
+    // showprovince（province[i],provinceText[i])改成这样，function（pName,Chinese_）{}
+    function  showProvince(pName, Chinese_){
+
+        //这写省份的js都是通过在线构建工具生成的，保存在本地，需要时加载使用即可，最好不要一开始全部直接引入。
+        loadBdScript('$'+pName+'JS','js/province/'+pName+'.js',function(){
+
+            //初始化echarts:具体代码参考上面初始化中国地图即可，这里不再重复。
+            initEcharts(Chinese_) ;
+
+        });
+    }
+
+    //加载对应的JS
+    function loadBdScript(scriptId, url, callback) {
+        var script = document.createElement("script")
+        script.type = "text/javascript";
+        if (script.readyState){  //IE
+            script.onreadystatechange = function(){
+                if (script.readyState == "loaded" || script.readyState == "complete"){
+                    script.onreadystatechange = null;
+                    callback();
+                }
+            };
+        } else {  //Others
+            script.onload = function(){
+                callback();
+            };
+        }
+        script.src = url;
+        script.id = scriptId;
+        document.getElementsByTagName("head")[0].appendChild(script);
+
+    };
+
+
+</script>
+</body>
+</html>
